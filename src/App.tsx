@@ -1,10 +1,12 @@
-
-export default function App() {
+import { router } from '../src/routes/router';  
+import { RouterProvider } from 'react-router-dom';
+import '../src/styles/index.css';
+function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <h1 className="text-3xl font-bold text-primary">
-        Tailwind v4 OK 😎
-      </h1>
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
+
+export default App;

@@ -2,13 +2,11 @@ import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
   return (
-    <>
-      <div className="flex h-screen">
-        <main className="bg-gray-bg flex-1 overflow-y-auto">
-          <Outlet />
-        </main>
-      </div>
-    </>
+    <div className="min-h-dvh w-full bg-black flex justify-center">
+      <main className="w-[100vw] max-w-[500px] bg-white min-h-dvh">
+        <Outlet />
+      </main>
+    </div>
   );
 };
 

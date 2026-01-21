@@ -6,10 +6,12 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: '#0064FF', 
-        success: '#2BC48A',
-        danger: '#F04452',
+      fontFamily: {
+        sans: ['Pretendard'],
+        brand: ['Pretendard'],
+      },
+      maxWidth: {
+        app: '500px',
       },
     },
   },
