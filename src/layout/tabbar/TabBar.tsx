@@ -11,7 +11,7 @@ const TabBar = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="w-full bg-white flex border-t border-gray-300">
+    <div className="w-full bg-white flex border-t border-gray-300 max-w-[500px]">
       <Tab
         icon={Icon1}
         activeIcon={Icon1_On}
