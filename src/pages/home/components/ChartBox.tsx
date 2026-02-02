@@ -23,7 +23,7 @@ interface AssetData {
   date: string;
   value: number;
 }
-
+// TODO: 나중에 API 연결해서 작업하기!!
 const mockAssetData: AssetData[] = [
   { date: '1/25', value: 980000 },
   { date: '1/26', value: 1010000 },
@@ -37,7 +37,7 @@ const labels = mockAssetData.map((d) => d.date);
 
 const ChartBox = () => {
   const [selected, setSelected] = useState<AssetData | null>(null);
-
+// TODO: 이거 스타일링 부분임 나중에 확인
   const chartData = {
     labels: mockAssetData.map((d) => d.date),
     datasets: [
@@ -52,7 +52,7 @@ const ChartBox = () => {
       },
     ],
   };
-
+ // TODO: 이거 이후에 속성들 확인 및 티스토리 블로그 정리!
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -92,7 +92,7 @@ const ChartBox = () => {
         },
       },
     },
-
+   
     scales: {
       x: {
         grid: {
@@ -123,7 +123,6 @@ const ChartBox = () => {
 
   return (
     <div className="flex gap-[24px] bg-white rounded-[24px] pt-[5rem] px-[1rem] pb-[2rem] shadow-sm relative">
-      {/* 📈 차트 영역 */}
       <div className="flex-1 h-[220px]">
         <Line data={chartData} options={chartOptions} />
       </div>
