@@ -1,8 +1,32 @@
+import { useState } from 'react';
 import MainLogo from '/logo/mVestLogo.png';
 import icon1 from '/icons/onboarding/icon1.svg';
 import icon2 from '/icons/onboarding/icon2.svg';
 import icon3 from '/icons/onboarding/icon3.svg';    
 const OnBoarding =()=>{
+    const introSlides = [
+        {
+            emoji: '🎓',
+            title: '투자, 게임처럼 배워요',
+            description: '실제 돈 없이\n주식 투자를 재미있게 연습할 수 있어요',
+            color: 'from-blue-500 to-blue-600'
+        },
+        {
+            emoji: '💰',
+            title: '100만원으로 시작',
+            description: '가상의 돈으로\n안전하게 연습해보세요',
+            color: 'from-blue-500 to-blue-600'
+        },
+        {
+            emoji: '📊',
+            title: 'AI 피드백으로 성장',
+            description: '매일 투자 결과를 분석하고\n조언을 받아보세요',
+            color: 'from-blue-500 to-blue-600'
+        }
+    ];
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const slide = introSlides[currentSlide];
+    console.log(currentSlide, slide);
     return(
         <div className="px-[3rem] bg-[linear-gradient(166deg,_#D0DFFF_-1.52%,_#FFF_100%)] h-[100dvh] w-[100dvw] fixed flex flex-col justify-center items-center">
             <div className='relative flex flex-col justify-center items-center mt-[-15rem]'>
