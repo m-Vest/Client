@@ -2,6 +2,8 @@ import { ROUTES_CONFIG } from './routesConfig';
 import { createBrowserRouter } from 'react-router-dom';
 import Layout from '../layout/Layout';
 import Home from '../pages/home/Home';
+import OnBoarding from '../pages/onboarding/OnBoarding';
+import Login from '../pages/login/Login';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -10,6 +12,14 @@ export const router = createBrowserRouter([
       {
         path: ROUTES_CONFIG.home.path,
         element: <Home />,
+      },
+      {
+        path: ROUTES_CONFIG.login.path,
+        element: <Login />,
+      },
+      {
+        path: ROUTES_CONFIG.onboarding.path,
+        element: <OnBoarding />,
       },
      
     ],
