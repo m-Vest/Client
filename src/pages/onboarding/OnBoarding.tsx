@@ -29,34 +29,41 @@ const OnBoarding =()=>{
     const slide = introSlides[currentSlide];
     console.log(currentSlide, slide);
     return(
-        <div className="px-[5rem] bg-[linear-gradient(166deg,_#D0DFFF_-1.52%,_#FFF_100%)] h-[100dvh] w-[100dvw] fixed flex flex-col justify-center items-center">
-            <AnimatePresence mode="wait">
-                <motion.div
-                    key={currentSlide}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.39, ease: 'easeOut' }}
-                    className="flex flex-col justify-center items-center"
-                >
-                    <img
-                    src={slide.img}
-                    alt="Onboarding Step"
-                    className="w-[20rem] h-[20rem] mb-[2rem]"
-                    />
+        <div className="relative max-w-[500px] px-[5rem] bg-[linear-gradient(166deg,_#D0DFFF_-1.52%,_#FFF_100%)] h-[100dvh] w-[100dvw] fixed flex flex-col justify-center items-center">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={currentSlide}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.39, ease: 'easeOut' }}
+                        className="w-full flex flex-col justify-center items-center"
+                    >
+                        <img
+                        src={slide.img}
+                        alt="Onboarding Step"
+                        className="w-[20rem] h-[20rem] mb-[2rem]"
+                        />
 
-                    <div className="mt-[-5rem] flex flex-col justify-center items-center">
-                    <h1 className="text-[3rem] text-black font-bold">
-                        {slide.title}
-                    </h1>
-                    <p className="text-[1.8rem] text-[#4A5565] font-normal text-center mt-[1rem] whitespace-pre-line">
-                        {slide.description}
-                    </p>
-                    </div>
-                </motion.div>
-            </AnimatePresence>
+                        <div className="mt-[-5rem] flex flex-col justify-center items-center">
+                            <h1 className="text-[3rem] text-black font-bold">
+                                {slide.title}
+                            </h1>
+                            <p className="text-[1.8rem] text-[#4A5565] font-normal text-center mt-[1rem] whitespace-pre-line">
+                                {slide.description}
+                            </p>
+                        </div>
+                        <div className='w-full mt-[3.5rem] p-[2.5rem] rounded-[16px] border border-[0.556px] border-[#BEDBFF] bg-[#EFF6FF]'>
+                                <div className='font-semibold text-[#1C398E] text-[1.4rem] py-[0.5rem]'>💵 시작 자금</div>
+                                <div className='flex flex-row mt-[1.2rem] items-center justify-start'>
+                                    <span className='text-[3rem] text-[#1C398E] font-bold'>100000</span>
+                                    <span className='text-[3rem] text-[#1C398E] font-bold'>원</span>
+                                </div>
 
-          <Button onClick={() => setCurrentSlide((prev) => (prev + 1) % introSlides.length)} />
+                            </div>
+                    </motion.div>
+                </AnimatePresence>
+                <Button onClick={() => setCurrentSlide((prev) => (prev + 1) % introSlides.length)} />
         </div>
     )
 }

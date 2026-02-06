@@ -1,15 +1,20 @@
 import MainLogo from '/logo/mVestLogo.png';
 import icon1 from '/icons/onboarding/icon1.svg';
 import icon2 from '/icons/onboarding/icon2.svg';
-import icon3 from '/icons/onboarding/icon3.svg';    
+import icon3 from '/icons/onboarding/icon3.svg';  
+import { useNavigate } from 'react-router-dom';  
 const Login =()=>{
+    const navigate = useNavigate();
+    const kakaoLogin = () => {
+        navigate('/onboarding');
+    }
     return(
-        <div className="px-[3rem] bg-[linear-gradient(166deg,_#D0DFFF_-1.52%,_#FFF_100%)] h-[100dvh] w-[100dvw] fixed flex flex-col justify-center items-center">
+        <div className="max-w-[500px] px-[3rem] bg-[linear-gradient(166deg,_#D0DFFF_-1.52%,_#FFF_100%)] h-[100dvh] w-[100dvw] fixed flex flex-col justify-center items-center">
             <div className='relative flex flex-col justify-center items-center mt-[-15rem]'>
                 <img src={MainLogo} alt="mVest Logo" className="w-[15.7rem] h-[15.7rem] mb-[1.5rem]" />
                 <h1 className='font-bold text-black text-[3.7rem]'>MVest</h1>
                 <p className='font-medium text-[1.8rem] text-[#4A5565] mb-[7rem]'>투자 초보를 위한 모의 투자 서비스</p>
-                <button className='w-full bg-[#FEE500] py-[1.5rem] flex flex-row justify-center items-center gap-[1rem] rounded-[14px] shadow-lg active:scale-95 transition-transform disabled:opacity-50'>
+                <button onClick={kakaoLogin} className='w-full bg-[#FEE500] py-[1.5rem] flex flex-row justify-center items-center gap-[1rem] rounded-[14px] shadow-lg active:scale-95 transition-transform disabled:opacity-50'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M10 3C5.58172 3 2 5.89543 2 9.5C2 11.6484 3.24328 13.5313 5.13531 14.6953L4.38438 17.3266C4.33672 17.4766 4.44297 17.6328 4.60156 17.6328C4.65469 17.6328 4.70938 17.6141 4.75547 17.5766L7.88281 15.2578C8.57656 15.4016 9.28203 15.5 10 15.5C14.4183 15.5 18 12.6046 18 9C18 5.39543 14.4183 3 10 3Z" fill="black"/>
                         </svg>
