@@ -14,26 +14,29 @@ const Login =()=>{
                 <img src={MainLogo} alt="mVest Logo" className="w-[15.7rem] h-[15.7rem] mb-[1.5rem]" />
                 <h1 className='font-bold text-black text-[3.7rem]'>MVest</h1>
                 <p className='font-medium text-[1.8rem] text-[#4A5565] mb-[7rem]'>투자 초보를 위한 모의 투자 서비스</p>
-                <button onClick={kakaoLogin} className='w-full bg-[#FEE500] py-[1.5rem] flex flex-row justify-center items-center gap-[1rem] rounded-[14px] shadow-lg active:scale-95 transition-transform disabled:opacity-50'>
+            </div>
+             <div className='absolute bottom-[5rem] w-full flex flex-col justify-center items-center'>
+                <button onClick={kakaoLogin} className='w-[80%] bg-[#FEE500] py-[1.5rem] flex flex-row justify-center items-center gap-[1rem] rounded-[14px] shadow-lg active:scale-95 transition-transform disabled:opacity-50'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M10 3C5.58172 3 2 5.89543 2 9.5C2 11.6484 3.24328 13.5313 5.13531 14.6953L4.38438 17.3266C4.33672 17.4766 4.44297 17.6328 4.60156 17.6328C4.65469 17.6328 4.70938 17.6141 4.75547 17.5766L7.88281 15.2578C8.57656 15.4016 9.28203 15.5 10 15.5C14.4183 15.5 18 12.6046 18 9C18 5.39543 14.4183 3 10 3Z" fill="black"/>
                         </svg>
                     <span className='text-[1.5rem] font-bold leading-[2.4rem] tracking-[-0.0312rem]'>카카오로 3초만에 시작하기</span>
                 </button>
                 <p className='text-[#6A7282] text-[1.2rem] font-medium mt-[1rem]'>로그인하면 서비스 이용약관 및 개인정보 처리방침에 동의하게 됩니다.</p>
-            </div>
-             <div className='absolute bottom-[5rem] flex flex-row  justify-around w-full'>
-                <div className='flex flex-col justify-center items-center'>
-                    <img src={icon1} alt="icon1" className='w-[4.5rem] h-[4.5rem] mb-[0.8rem]'/>  
-                    <p className='text-[#4A5565] text-[1.2rem] font-semibold'>100% 안전</p>
-                </div>
-                <div className='flex flex-col justify-center items-center'>
-                    <img src={icon2} alt="icon2" className='w-[4.5rem] h-[4.5rem] mb-[0.8rem]'/>  
-                    <p className='text-[#4A5565] text-[1.2rem] font-semibold'>쉬운 학습</p>
-                </div>
-                <div className='flex flex-col justify-center items-center'>
-                    <img src={icon3} alt="icon3" className='w-[4.5rem] h-[4.5rem] mb-[0.8rem]'/>  
-                    <p className='text-[#4A5565] text-[1.2rem] font-semibold'>실제 주식 변동</p>
+      
+                <div className='mt-[5rem] flex flex-row justify-around w-full'>
+                    <div className='flex flex-col justify-center items-center'>
+                        <img src={icon1} alt="icon1" className='w-[4.5rem] h-[4.5rem] mb-[0.8rem]'/>  
+                        <p className='text-[#4A5565] text-[1.2rem] font-semibold'>100% 안전</p>
+                    </div>
+                    <div className='flex flex-col justify-center items-center'>
+                        <img src={icon2} alt="icon2" className='w-[4.5rem] h-[4.5rem] mb-[0.8rem]'/>  
+                        <p className='text-[#4A5565] text-[1.2rem] font-semibold'>쉬운 학습</p>
+                    </div>
+                    <div className='flex flex-col justify-center items-center'>
+                        <img src={icon3} alt="icon3" className='w-[4.5rem] h-[4.5rem] mb-[0.8rem]'/>  
+                        <p className='text-[#4A5565] text-[1.2rem] font-semibold'>실제 주식 변동</p>
+                    </div>
                 </div>
              </div>
         </div>
