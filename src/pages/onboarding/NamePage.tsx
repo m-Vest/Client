@@ -15,9 +15,9 @@ const NamePage = () => {
         <div className="relative max-w-[500px] px-[5rem] bg-[linear-gradient(166deg,_#D0DFFF_-1.52%,_#FFF_100%)] h-[100dvh] w-[100dvw] fixed flex flex-col justify-center items-center">
             <img src={hi} alt="Onboarding Step" className="w-[6rem] h-[6rem] mb-[7rem]"/>
             <div className="mt-[-5rem] flex flex-col justify-center items-center">
-                <h1 className="text-[3rem] text-black font-bold">안녕하세요!</h1>
+                <h1 className="text-[3rem] text-black font-bold">안녕하세요</h1>
                 <p className="text-[1.8rem] text-[#4A5565] font-normal text-center mt-[1rem] whitespace-pre-line">
-                    이름을 입력해주세요
+                    닉네임을 입력해주세요
                 </p>
             </div>
             <div className='mt-[3rem] w-[90%]'>
@@ -28,7 +28,7 @@ const NamePage = () => {
                         key={example}
                         type="button"
                         onClick={() => handleExampleClick(example)}
-                        className="rounded-[10px]  bg-[#EFF6FF] border border-[#d4e3ff] mt-[1rem] px-[1.4rem] py-[0.8rem] text-[1.3rem] font-medium text-[#155DFC]active:scale-95"
+                        className="transition-transform disabled:opacity-50 rounded-[10px] hover:bg-[#dee8fc] bg-[#EFF6FF] border border-[#c4cee2] mt-[1rem] px-[1.4rem] py-[0.8rem] text-[1.3rem] font-medium text-[#155DFC] active:scale-95"
                     >
                         {example}
                     </button>
