@@ -1,10 +1,14 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import step1 from '/icons/onboarding/step1.png';  
 import step2 from '/icons/onboarding/step2.png';  
 import step3 from '/icons/onboarding/step3.png';
 import Button from './components/Button'; 
+import info1 from '/icons/onboarding/info1.png';
+import info2 from '/icons/onboarding/info2.png';
 const OnBoarding =()=>{
+    const navigate = useNavigate();
     const introSlides = [
         {
             img: step1,
@@ -27,6 +31,14 @@ const OnBoarding =()=>{
     ];
     const [currentSlide, setCurrentSlide] = useState(0);
     const slide = introSlides[currentSlide];
+    const handleNext = () => {
+        if (currentSlide === introSlides.length - 1) {
+            navigate('/namePage');
+            return;
+        }
+
+        setCurrentSlide((prev) => prev + 1);
+       };
     console.log(currentSlide, slide);
     return(
         <div className="relative max-w-[500px] px-[5rem] bg-[linear-gradient(166deg,_#D0DFFF_-1.52%,_#FFF_100%)] h-[100dvh] w-[100dvw] fixed flex flex-col justify-center items-center">
@@ -53,17 +65,39 @@ const OnBoarding =()=>{
                                 {slide.description}
                             </p>
                         </div>
-                        <div className='w-full mt-[3.5rem] p-[2.5rem] rounded-[16px] border border-[0.556px] border-[#BEDBFF] bg-[#EFF6FF]'>
-                                <div className='font-semibold text-[#1C398E] text-[1.4rem] py-[0.5rem]'>💵 시작 자금</div>
-                                <div className='flex flex-row mt-[1.2rem] items-center justify-start'>
-                                    <span className='text-[3rem] text-[#1C398E] font-bold'>100000</span>
-                                    <span className='text-[3rem] text-[#1C398E] font-bold'>원</span>
+                        <div className='w-full'>
+                            {currentSlide == 1 && (
+                                <div className='w-full mt-[3.5rem] p-[2.3rem] rounded-[16px] border border-[0.556px] border-[#BEDBFF] bg-[#EFF6FF]'>
+                                    <div className='font-semibold text-[#1C398E] text-[1.4rem] py-[0.5rem]'>💵  시작 자금</div>
+                                    <div className='flex flex-row mt-[0.3rem] items-center justify-start'>
+                                        <span className='text-[3rem] text-[#1C398E] font-bold'>100000</span>
+                                        <span className='text-[3rem] text-[#1C398E] font-bold'>원</span>
+                                    </div>
                                 </div>
-
-                            </div>
+                            )}
+                            {currentSlide == 2 && (
+                                <div className='flex flex-col gap-[1.2rem] mt-[3.5rem]'>
+                                    <div className='flex flex-row gap-[1.2rem] w-full p-[1.8rem] rounded-[14px] border border-[0.556px] border-[#BEDBFF] bg-[#EFF6FF]'>
+                                        <img src={info1} alt="daily feedback" className='w-[4rem] h-[4rem]'/>
+                                        <div className='flex flex-col'>
+                                            <span className='text-[#1C398E] text-[1.4rem] font-semibold leading-[2rem] tracking-[-0.015rem]'>실시간 차트 분석</span>
+                                            <span className='text-[#1447E6] text-[1.2rem] font-normal leading-[1.6rem]'>자산 변화를 한눈에 봐요</span>
+                                        </div>
+                                     </div>
+                                     <div className='flex flex-row gap-[1.2rem] w-full p-[1.8rem] rounded-[14px] border border-[0.556px] border-[#BEDBFF] bg-[#EFF6FF]'>
+                                        <img src={info2} alt="daily feedback" className='w-[4rem] h-[4rem]'/>
+                                        <div className='flex flex-col'>
+                                            <span className='text-[#1C398E] text-[1.4rem] font-semibold leading-[2rem] tracking-[-0.015rem]'>맞춤형 데일리 조언</span>
+                                            <span className='text-[#1447E6] text-[1.2rem] font-normal leading-[1.6rem]'>투자습관을 개선해요</span>
+                                        </div>
+                                     </div>
+                                </div>
+                                
+                            )}
+                        </div>
                     </motion.div>
                 </AnimatePresence>
-                <Button onClick={() => setCurrentSlide((prev) => (prev + 1) % introSlides.length)} />
+                <Button text="다음" onClick={handleNext} />
         </div>
     )
 }

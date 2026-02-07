@@ -5,7 +5,7 @@ import { ROUTES_CONFIG } from '../routes/routesConfig';
 const Layout = () => {
   const location = useLocation();
 
-  const isSidebarHidden = location.pathname.startsWith(ROUTES_CONFIG.onboarding.path) || location.pathname.startsWith(ROUTES_CONFIG.login.path)
+  const isSidebarHidden = location.pathname.startsWith(ROUTES_CONFIG.onboarding.path) || location.pathname.startsWith(ROUTES_CONFIG.login.path) || location.pathname.startsWith(ROUTES_CONFIG.namePage.path);
 
 
   return (

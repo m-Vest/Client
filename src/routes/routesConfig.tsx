@@ -7,6 +7,10 @@ export const ROUTES_CONFIG = {
     title: '로그인',
     path: '/login'
   },
+  namePage: {
+    title: '닉네임 설정',
+    path: '/namePage',
+  },
   home: {
     title: '홈',
     path: '/',
