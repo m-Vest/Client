@@ -2,11 +2,16 @@ import MainLogo from '/logo/mVestLogo.png';
 import icon1 from '/icons/onboarding/icon1.svg';
 import icon2 from '/icons/onboarding/icon2.svg';
 import icon3 from '/icons/onboarding/icon3.svg';  
-import { useNavigate } from 'react-router-dom';  
 const Login =()=>{
-    const navigate = useNavigate();
     const kakaoLogin = () => {
-        navigate('/onboarding');
+        const KAKAO_AUTH_URL =
+            `https://kauth.kakao.com/oauth/authorize` +
+            `?client_id=${import.meta.env.VITE_KAKAO_REST_API_KEY}` +
+            `&redirect_uri=${import.meta.env.VITE_KAKAO_REDIRECT_URI}` +
+            `&response_type=code`;
+
+            window.location.href = KAKAO_AUTH_URL;
+        //navigate('/onboarding');
     }
     return(
         <div className="max-w-[500px] px-[3rem] bg-[linear-gradient(166deg,_#D0DFFF_-1.52%,_#FFF_100%)] h-[100dvh] w-[100dvw] fixed flex flex-col justify-center items-center">

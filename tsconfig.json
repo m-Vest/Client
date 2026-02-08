@@ -8,6 +8,8 @@
     "baseUrl": "src",
     "paths": {
       "@routes/*": ["routes/*"],
+      "@apis/*": ["apis/*"],
+      "@lib/*": ["lib/*"],
       "@assets/*": ["assets/*"],
       "@pages/*": ["pages/*"],
       "@constants/*": ["constants/*"]

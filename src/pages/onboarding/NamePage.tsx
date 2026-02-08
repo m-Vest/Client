@@ -1,7 +1,7 @@
 import hi from '/icons/onboarding/hi.png';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NameInput from './components/nameInput';
+import NameInput from './components/NameInput';
 import Button from './components/Button';
 const NamePage = () => {
     const [name, setName] = useState('');
