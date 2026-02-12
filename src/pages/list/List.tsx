@@ -1,3 +1,4 @@
+import ListStock from "./components/listStock";
 const List =() =>{
     return (
         <div className="py-[3.2rem] px-[2rem] flex flex-col gap-[2.4rem] justify-between bg-[#F9FAFB]">
@@ -7,7 +8,8 @@ const List =() =>{
             </div>
              <div className="w-full flex flex-col gap-[0.8rem]">
                 <h1 className="text-[1.8rem] text-[#101828] font-bold mt-[1.2rem]"> 전체 종목 </h1>
-                
+                <ListStock />
+                <ListStock /><ListStock />
             </div>
         </div>
        
