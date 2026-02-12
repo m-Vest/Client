@@ -17,7 +17,7 @@ const ListStock = ({name, price, dir, change}: ListStockProps) => {
                             <h3 className='text-[#6A7282] text-[1.4rem] font-semibold'>{price.toLocaleString()}원</h3>
                             <div className='flex flex-row gap-[0.3rem] items-center'>
                                 <img src={dir === 'up' ? upRatio : downRatio} className='w-[1.2rem] h-auto'/>
-                                <span className={`text-[1.2rem] font-bold ${dir === 'up' ? 'text-[#E7000B]' : 'text-[#155DFC]'}`}>+{change.toLocaleString()}원</span>
+                                <span className={`text-[1.2rem] font-bold mt-[-0.2rem] ${dir === 'up' ? 'text-[#E7000B]' : 'text-[#155DFC]'}`}>{change.toLocaleString()}원</span>
                             </div>
                         </div>
                     </div>
