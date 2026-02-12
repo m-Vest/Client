@@ -8,8 +8,7 @@ const List =() =>{
             </div>
              <div className="w-full flex flex-col gap-[0.8rem]">
                 <h1 className="text-[1.8rem] text-[#101828] font-bold mt-[1.2rem]"> 전체 종목 </h1>
-                <ListStock />
-                <ListStock /><ListStock />
+                <ListStock name="삼성전자" price={75000} dir="up" change={500}   />
             </div>
         </div>
        

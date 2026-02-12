@@ -2,7 +2,6 @@ import RocketImg from '/icons/home/rocket.svg';
 import MenuBox from './components/MenuBox';
 import ChartBox from './components/ChartBox';
 import InfoBox from './components/InfoBox';
-import upRatio from '/icons/home/upRatio.svg';
 const Home =()=>{
     return (
         <div className="py-[3.2rem] px-[2rem] flex flex-col gap-[2.4rem] justify-between bg-[#F9FAFB]">
