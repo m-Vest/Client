@@ -12,8 +12,9 @@ const List =() =>{
   ];
 
   const filteredStocks = mockStocks.filter((stock) =>
-    stock.name.includes(keyword)
-  );
+    stock.name.toLowerCase().includes(keyword.toLowerCase())
+    );
+
 
     return (
         <div className="py-[3.2rem] px-[2rem] flex flex-col gap-[2.4rem] justify-between bg-[#F9FAFB]">
