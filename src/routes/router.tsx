@@ -5,6 +5,7 @@ import Home from '../pages/home/Home';
 import OnBoarding from '../pages/onboarding/OnBoarding';
 import Login from '../pages/login/Login';
 import NamePage from '../pages/onboarding/NamePage';
+import List from '../pages/list/List';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -13,6 +14,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES_CONFIG.home.path,
         element: <Home />,
+      },
+      {
+        path: ROUTES_CONFIG.list.path,
+        element: <List />,
       },
       {
         path: ROUTES_CONFIG.login.path,

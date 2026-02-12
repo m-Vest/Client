@@ -15,4 +15,8 @@ export const ROUTES_CONFIG = {
     title: '홈',
     path: '/',
   },
+  list: {
+    title: '종목 목록',
+    path: '/list',
+  },
 }
