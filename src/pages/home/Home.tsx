@@ -4,9 +4,9 @@ import ChartBox from './components/ChartBox';
 import InfoBox from './components/InfoBox';
 const Home =()=>{
     return (
-        <div className="py-[3.2rem] px-[2rem] flex flex-col gap-[2.4rem] justify-between bg-[#F9FAFB]">
+        <div className="pt-[3.2rem] pb-[8rem] px-[2rem] flex flex-col gap-[2.4rem] justify-between bg-[#F9FAFB]">
             <div className="flex flex-col gap-[0.4rem]">
-                <h2 className="text-[2.4rem] font-bold">투자왕님</h2>
+                <h2 className="text-[2.4rem] font-bold">🤴🏻 투자왕님</h2>
                 <span className="text-[1.6rem] font-normal text-[#4A5565]">투자 실력을 키워가고 있어요!</span>
             </div>
             <div className="p-[2.4rem] flex flex-col rounded-[24px] bg-gradient-to-br justify-between bg-gradient-to-br from-[#1447E6] to-[rgba(127,156,219,0.82)] shadow-[0_10px_15px_-3px_rgba(0,0,0,0.10),_0_4px_6px_-4px_rgba(0,0,0,0.10)]">
@@ -44,16 +44,15 @@ const Home =()=>{
                     <p className="text-[1.4rem] text-[#364153] font-normal">다양한 종목들을 확인할 수 있어요!</p>
                 </div>
             </div>
-            <div className='flex flex-row gap-3'>
-              <MenuBox icon="/icons/home/buy.png" title="주식 사기" description="종목 둘러보기"/>
-              <MenuBox icon="/icons/home/myAsset.png" title="내 자산" description="보유 현황 보기"/>
-            </div>
             <div className='flex flex-row justify-between items-center gap-3'>
                 <InfoBox type='count' data={0}/>
                 <InfoBox type='stock' data={0}/>
                 <InfoBox type='revenue' data={0}/>
             </div>
-            
+            <div className='flex flex-row gap-3'>
+              <MenuBox icon="/icons/home/buy.png" title="주식 사기" description="종목 둘러보기"/>
+              <MenuBox icon="/icons/home/myAsset.png" title="내 자산" description="보유 현황 보기"/>
+            </div>
             
         </div>
     )
