@@ -11,7 +11,6 @@ const Login =()=>{
             `&response_type=code`;
 
             window.location.href = KAKAO_AUTH_URL;
-        //navigate('/onboarding');
     }
     return(
         <div className="max-w-[500px] px-[3rem] bg-[linear-gradient(166deg,_#D0DFFF_-1.52%,_#FFF_100%)] h-[100dvh] w-[100dvw] fixed flex flex-col justify-center items-center">
