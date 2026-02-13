@@ -3,11 +3,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NameInput from './components/NameInput';
 import Button from './components/Button';
+import { useSaveNickName } from '../../apis/query/useSaveNickName';
 const NamePage = () => {
     const [name, setName] = useState('');
-    const NICKNAME_EXAMPLES = ['성공맨', '부자재림이', '주린이', '윤혁'];
+    const NICKNAME_EXAMPLES = ['성공맨', '부자재림이', '윤혁'];
     const navigate = useNavigate();
+    const { saveNickName } = useSaveNickName();
 
+    const handleSaveNickname = (nickname: string) => {
+        localStorage.setItem('nickname', nickname);
+        saveNickName(nickname);
+        navigate('/onboarding');
+    }
     const handleExampleClick = (example: string) => {
         setName(example);
     };
@@ -35,7 +42,7 @@ const NamePage = () => {
                     ))}
                 </div>
             </div>
-            <Button text="시작하기" onClick={() => {navigate('/')}} />
+            <Button text="시작하기" onClick={() => handleSaveNickname(name)} />
       </div>
     )
 };

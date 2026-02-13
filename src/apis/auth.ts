@@ -1,23 +1,3 @@
-import { api } from '../lib/api';
-
-interface KakaoLoginRequest {
-  code: string;
-}
-
-export const kakaoLogin = async ({ code }: KakaoLoginRequest) => {
-  const { data } = await api.post(
-    'auth/login',
-    {
-      platform: 'KAKAO',
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${code}`,
-      }
-    }
-  );
-  return data;
-};
 
 
 // apis/auth/kakao.ts
