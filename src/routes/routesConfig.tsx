@@ -19,4 +19,8 @@ export const ROUTES_CONFIG = {
     title: '종목 목록',
     path: '/list',
   },
+  kakaoAuth: {
+    title: '카카오 인증',
+    path: '/auth/kakao', 
+  },
 }

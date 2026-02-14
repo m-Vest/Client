@@ -6,6 +6,7 @@ import OnBoarding from '../pages/onboarding/OnBoarding';
 import Login from '../pages/login/Login';
 import NamePage from '../pages/onboarding/NamePage';
 import List from '../pages/list/List';
+import KakaoRedirect from '../pages/login/auth/KakaoLogin'; 
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -31,7 +32,10 @@ export const router = createBrowserRouter([
         path: ROUTES_CONFIG.namePage.path,
         element: <NamePage />,
       },
-     
+      {
+       path: ROUTES_CONFIG.kakaoAuth.path,
+       element: <KakaoRedirect />,
+      },
     ],
   },
 ]);
