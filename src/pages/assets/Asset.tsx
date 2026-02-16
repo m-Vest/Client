@@ -1,6 +1,53 @@
 import ideaImg from '/icons/assets/idea.png';
 import MyAsset from './components/MyAsset';
 const Asset = ()=>{
+    const stocKList = [
+        {
+            stockName: 'SK 하이닉스',
+            stockCount: 10,
+            stockPrice: 98900,
+            totalAmount: 890000,
+            profitLoss: 980
+        },
+        {
+            stockName: '삼성전자',
+            stockCount: 5,
+            stockPrice: 75000,
+            totalAmount: 375000,
+            profitLoss: 5000
+        },
+        {
+            stockName: '삼성전자',
+            stockCount: 5,
+            stockPrice: 75000,
+            totalAmount: 375000,
+            profitLoss: 5000
+        },{
+            stockName: '삼성전자',
+            stockCount: 5,
+            stockPrice: 75000,
+            totalAmount: 375000,
+            profitLoss: 5000
+        },{
+            stockName: '삼성전자',
+            stockCount: 5,
+            stockPrice: 75000,
+            totalAmount: 375000,
+            profitLoss: 5000
+        },{
+            stockName: '삼성전자',
+            stockCount: 5,
+            stockPrice: 75000,
+            totalAmount: 375000,
+            profitLoss: 5000
+        },{
+            stockName: '삼성전자',
+            stockCount: 5,
+            stockPrice: 75000,
+            totalAmount: 375000,
+            profitLoss: 5000
+        }
+    ]
     return (
         <div className="pt-[3.2rem] pb-[8rem] flex flex-col justify-between bg-[#F9FAFB] flex flex-col justify-start">
              <div className="flex flex-col px-[2rem] gap-[0.4rem]">
@@ -17,7 +64,7 @@ const Asset = ()=>{
                     </span>
                 </div>
            </div>
-            <div className="relative w-full">
+            <div className="relative w-full ">
                <div className="absolute w-full top-[-3rem]">
                     <div className="pt-[7rem] pb-[3rem] px-[2rem] rounded-[16px] border border-[#FFF085] bg-gradient-to-br from-[#FEFCE8] to-[#FFF7ED] flex flex-row gap-[1.2rem]">
                        <img src={ideaImg} className="w-[4rem] h-[4rem]"/>
@@ -27,13 +74,21 @@ const Asset = ()=>{
                        </div>
                     </div>
 
-                    <div className='pt-[2.4rem] px-[2rem] w-full flex flex-col gap-[0.8rem]'>
+                    <div className='pt-[2.4rem] pb-[9rem] px-[2rem] w-full flex flex-col gap-[0.8rem]'>
                             <div className='flex flex-row justify-between items-center mb-[1.2rem]'>
                                 <h2 className='text-[1.8rem] font-bold'>보유 주식</h2>
                                 <span className='text-[1.4rem] text-[#6A7282] font-normal'>2개 종목</span>
                             </div>
-                            <MyAsset stockName='SK 하이닉스' stockCount={10} stockPrice={98900} totalAmount={890000} profitLoss={980}/>
-                            <MyAsset stockName='삼성전자' stockCount={5} stockPrice={75000} totalAmount={375000} profitLoss={5000}/>
+                            {stocKList.map((stock, index) => (
+                                <MyAsset
+                                    key={index}
+                                    stockName={stock.stockName}
+                                    stockCount={stock.stockCount}
+                                    stockPrice={stock.stockPrice}
+                                    totalAmount={stock.totalAmount}
+                                    profitLoss={stock.profitLoss}
+                                />
+                            ))}
                     </div>
                     
 
