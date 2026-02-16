@@ -1,4 +1,4 @@
-import ListStock from "./components/listStock";
+import ListStock from "./components/ListStock";
 import { useState } from "react";
 const List =() =>{
      const [keyword, setKeyword] = useState("");

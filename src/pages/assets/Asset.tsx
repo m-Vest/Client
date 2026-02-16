@@ -1,5 +1,5 @@
 import ideaImg from '/icons/assets/idea.png';
-
+import MyAsset from './components/MyAsset';
 const Asset = ()=>{
     return (
         <div className="pt-[3.2rem] pb-[8rem] flex flex-col justify-between bg-[#F9FAFB] flex flex-col justify-start">
@@ -32,59 +32,11 @@ const Asset = ()=>{
                                 <h2 className='text-[1.8rem] font-bold'>보유 주식</h2>
                                 <span className='text-[1.4rem] text-[#6A7282] font-normal'>2개 종목</span>
                             </div>
-
-                            <div className='rounded-2xl border border-[#E5E7EB] bg-white p-[1.7rem] flex flex-col gap-[1.2rem]'>
-                                <div className='flex flex-row items-center justify-between'>
-                                    <div className='flex flex-row gap-[1.5rem] justify-start items-center'>
-                                        <div className='text-[3rem]'>🚀</div>
-                                        <div className='flex flex-col gap-[0.1rem]'>
-                                            <div className='text-[1.6rem] font-bold'>SK 하이닉스</div>
-                                            <div className='text-[1.4rem] text-[#6A7282] font-normal'>10주 보유</div>
-                                        </div>
-                                    </div>
-                                    <div className='text-[#E7000B] text-[1.4rem] font-bold'>+980원 (+0.71%)</div>
-                                </div>
-                                <div className='rounded-[14px] bg-[#F9FAFB] p-[1.2rem] flex flex-row items-center justify-between'>
-                                    <span className='text-[#4A5565] text-[1.4rem] font-normal'>총 금액</span>
-                                    <span className='text-[1.6rem] font-bold'>89,000원</span>
-                                </div>
-                                <div className='flex flex-row items-center justify-between px-[1rem]'>
-                                    <span className='text-[#4A5565] text-[1.4rem] font-normal'>투자 원금</span>
-                                    <span className='text-[1.6rem] font-medium'>89,000원</span>
-                                </div>
-                                <div className='flex flex-row items-center justify-between px-[1rem]'>
-                                    <span className='text-[#4A5565] text-[1.4rem] font-normal'>1주 평가금액</span>
-                                    <span className='text-[1.6rem] font-medium'>98,900원</span>
-                                </div>
-                            </div>
-
-
-                            <div className='rounded-2xl border border-[#E5E7EB] bg-white p-[1.7rem] flex flex-col gap-[1.2rem]'>
-                                <div className='flex flex-row items-center justify-between'>
-                                    <div className='flex flex-row gap-[1.5rem] justify-start items-center'>
-                                        <div className='text-[3rem]'>🚀</div>
-                                        <div className='flex flex-col gap-[0.1rem]'>
-                                            <div className='text-[1.6rem] font-bold'>SK 하이닉스</div>
-                                            <div className='text-[1.4rem] text-[#6A7282] font-normal'>10주 보유</div>
-                                        </div>
-                                    </div>
-                                    <div className='text-[#E7000B] text-[1.4rem] font-bold'>+980원 (+0.71%)</div>
-                                </div>
-                                <div className='rounded-[14px] bg-[#F9FAFB] p-[1.2rem] flex flex-row items-center justify-between'>
-                                    <span className='text-[#4A5565] text-[1.4rem] font-normal'>총 금액</span>
-                                    <span className='text-[1.6rem] font-bold'>89,000원</span>
-                                </div>
-                                <div className='flex flex-row items-center justify-between px-[1rem]'>
-                                    <span className='text-[#4A5565] text-[1.4rem] font-normal'>투자 원금</span>
-                                    <span className='text-[1.6rem] font-medium'>89,000원</span>
-                                </div>
-                                <div className='flex flex-row items-center justify-between px-[1rem]'>
-                                    <span className='text-[#4A5565] text-[1.4rem] font-normal'>1주 평가금액</span>
-                                    <span className='text-[1.6rem] font-medium'>98,900원</span>
-                                </div>
-                            </div>
-
+                            <MyAsset stockName='SK 하이닉스' stockCount={10} stockPrice={98900} totalAmount={890000} profitLoss={980}/>
+                            <MyAsset stockName='삼성전자' stockCount={5} stockPrice={75000} totalAmount={375000} profitLoss={5000}/>
                     </div>
+                    
+
                </div>
                
             </div>
