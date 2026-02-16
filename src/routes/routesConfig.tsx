@@ -23,4 +23,8 @@ export const ROUTES_CONFIG = {
     title: '카카오 인증',
     path: '/auth/kakao', 
   },
+  assets: {
+    title: '내 자산',
+    path: '/assets', 
+  },
 }
