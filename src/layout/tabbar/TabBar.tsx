@@ -40,7 +40,10 @@ const TabBar = () => {
         activeIcon={Icon3_On}
         label="내 자산"
         isActive={activeTab === 2}
-        onClick={() => setActiveTab(2)}
+        onClick={() => {
+          setActiveTab(2);
+          navigate('/assets')
+        }}
       />
     </div>
   );
