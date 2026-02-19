@@ -27,4 +27,8 @@ export const ROUTES_CONFIG = {
     title: '내 자산',
     path: '/assets', 
   },
+  order: {
+    title: '주문 페이지',
+    path: '/order', 
+  },
 }
