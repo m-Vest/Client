@@ -6,8 +6,11 @@ import Icon1_On from '/icons/tabbar/icon1_on.svg';
 import Icon2_On from '/icons/tabbar/icon2_on.svg';
 import Icon3_On from '/icons/tabbar/icon3_on.svg';
 import Tab from './Tab';
+import { useNavigate } from 'react-router-dom';
+import { nav } from 'framer-motion/client';
 
 const TabBar = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -17,21 +20,30 @@ const TabBar = () => {
         activeIcon={Icon1_On}
         label="홈"
         isActive={activeTab === 0}
-        onClick={() => setActiveTab(0)}
+        onClick={() => {
+          setActiveTab(0);
+          navigate('/')
+        }}
       />
       <Tab
         icon={Icon2}
         activeIcon={Icon2_On}
         label="주식"
         isActive={activeTab === 1}
-        onClick={() => setActiveTab(1)}
+        onClick={() => {
+          setActiveTab(1);
+          navigate('/list')
+        }}
       />
       <Tab
         icon={Icon3}
         activeIcon={Icon3_On}
         label="내 자산"
         isActive={activeTab === 2}
-        onClick={() => setActiveTab(2)}
+        onClick={() => {
+          setActiveTab(2);
+          navigate('/assets')
+        }}
       />
     </div>
   );
