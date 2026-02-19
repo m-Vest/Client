@@ -5,9 +5,11 @@ interface MyAssetProps {
     totalAmount: number;
     profitLoss: number;
 }
+import { useNavigate } from "react-router-dom";
 const MyAsset = (props: MyAssetProps) => {
+    const navigate = useNavigate();
     return (
-         <div className='rounded-2xl border border-[#E5E7EB] bg-white p-[1.7rem] flex flex-col gap-[1.2rem]'>
+         <div className='rounded-2xl border border-[#E5E7EB] bg-white p-[1.7rem] flex flex-col gap-[1.2rem]' onClick ={()=> navigate('/order')}>
             <div className='flex flex-row items-center justify-between'>
                 <div className='flex flex-row gap-[1.5rem] justify-start items-center'>
                     <div className='text-[3rem]'>🚀</div>
