@@ -37,7 +37,7 @@ const OrderModal = ({stockName, stockCode, stockPrice, myAsset, onClose}: OrderM
                         </div>
                         <div className='flex flex-row justify-between mt-[2.4rem] items-center'>
                             <span className='text-[1.4rem] font-bold'>주문 수량</span>
-                            <span className='text-[1.4rem] font-normal'>최대 {maxQuantity}주</span>
+                            <span className='text-[1.4rem] font-normal'>최대 {maxQuantity}주 가능</span>
                         </div>
                         <div className='flex flex-row justify-around gap-[2rem] mt-[1.6rem] items-center'>
                             <img src={minusIcon} className='w-[2rem] h-[2rem]' onClick={handleMinus}/>
