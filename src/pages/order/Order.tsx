@@ -2,13 +2,15 @@ import OrderHeader from "./components/OrderHeader";
 import walletImg from '/icons/order/wallet.png'
 import { useLocation } from "react-router-dom";
 import OrderModal from "./components/orderModal";
+import { useState } from "react";
 const Order = () =>{
     const location = useLocation();
-     const { stockName } = location.state || {};
+    const { stockName } = location.state || {};
+    const [isOpen, setIsOpen] = useState(true);
     return (
         <div className="relative w-full h-full flex flex-col gap-[2.4rem] justify-between bg-[#fafafa]">
             <OrderHeader stockName={stockName}/>
-            <OrderModal />
+            {isOpen &&  <OrderModal stockName={stockName} stockCode="000660" stockPrice={128000} myAsset={1280000} onClose={() => setIsOpen(false)}/>}
             <div className="relative pt-[8rem] px-[2rem] pb-[11rem] flex flex-col gap-[1.6rem] bg-[#fafafa]">
                 <div className="rounded-3xl bg-white shadow-sm p-[2.4rem]">
                      <h1 className="text-[#6A7282] text-[1.4rem] font-normal">현재가</h1>
