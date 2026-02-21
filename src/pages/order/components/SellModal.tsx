@@ -53,7 +53,7 @@ const SellModal = ({stockName, stockCode, stockPrice, myStockCount, onClose}: Or
                             </div>
                             <div className='text-[#6A7282] text-[1.4rem] font-normal mt-[1.9rem]'> {price.toLocaleString()}원 × {quantity}주</div>
                         </div>
-                        <button className='w-full mt-[3.2rem] rounded-[16px] bg-[#E7000B] text-white text-[1.6rem] font-bold py-[1.6rem]'>
+                        <button className='w-full mt-[3.2rem] rounded-[16px] bg-[#E7000B] text-white text-[1.6rem] font-bold py-[1.6rem]' onClick={onClose}>
                             매수하기
                         </button>
                     </div>
