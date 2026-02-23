@@ -2,8 +2,9 @@ import RocketImg from '/icons/home/rocket.svg';
 import MenuBox from './components/MenuBox';
 import ChartBox from './components/ChartBox';
 import InfoBox from './components/InfoBox';
-import upRatio from '/icons/home/upRatio.svg';
+import { useNavigate } from 'react-router-dom';
 const Home =()=>{
+    const navigate = useNavigate();
     const nickname = localStorage.getItem('nickname') || '투자왕님';
     return (
         <div className="pt-[3.2rem] pb-[8rem] px-[2rem] flex flex-col gap-[2.4rem] justify-between bg-[#F9FAFB]">
@@ -52,8 +53,8 @@ const Home =()=>{
                 <InfoBox type='revenue' data={0}/>
             </div>
             <div className='flex flex-row gap-3'>
-              <MenuBox icon="/icons/home/buy.png" title="주식 사기" description="종목 둘러보기"/>
-              <MenuBox icon="/icons/home/myAsset.png" title="내 자산" description="보유 현황 보기"/>
+              <MenuBox icon="/icons/home/buy.png" title="주식 사기" description="종목 둘러보기" onLanding={()=>navigate('/list')}/>
+              <MenuBox icon="/icons/home/myAsset.png" title="내 자산" description="보유 현황 보기" onLanding={()=>navigate('/assets')}/>
             </div>
             
         </div>
