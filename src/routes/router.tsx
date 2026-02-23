@@ -8,6 +8,7 @@ import NamePage from '../pages/onboarding/NamePage';
 import List from '../pages/list/List';
 import KakaoRedirect from '../pages/login/auth/KakaoLogin'; 
 import Asset from '../pages/assets/Asset';
+import Order from '../pages/order/Order';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
        path: ROUTES_CONFIG.kakaoAuth.path,
        element: <KakaoRedirect />,
+      },
+      {
+       path: ROUTES_CONFIG.order.path,
+       element: <Order />,
       },
       {
        path: ROUTES_CONFIG.assets.path,

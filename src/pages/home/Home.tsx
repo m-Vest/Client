@@ -2,13 +2,14 @@ import RocketImg from '/icons/home/rocket.svg';
 import MenuBox from './components/MenuBox';
 import ChartBox from './components/ChartBox';
 import InfoBox from './components/InfoBox';
-import upRatio from '/icons/home/upRatio.svg';
+import { useNavigate } from 'react-router-dom';
 const Home =()=>{
+    const navigate = useNavigate();
     const nickname = localStorage.getItem('nickname') || '투자왕님';
     return (
         <div className="pt-[3.2rem] pb-[8rem] px-[2rem] flex flex-col gap-[2.4rem] justify-between bg-[#F9FAFB]">
             <div className="flex flex-col gap-[0.4rem]">
-                <h2 className="text-[2.4rem] font-bold">{nickname} <span className='text-[2.4rem] font-medium'>님</span></h2>
+                <h2 className="text-[2.4rem] font-bold">👤 {nickname} <span className='text-[2.4rem] font-medium'>님</span></h2>
                 <span className="text-[1.6rem] font-normal text-[#4A5565]">투자 실력을 키워가고 있어요!</span>
             </div>
             <div className="p-[2.4rem] flex flex-col rounded-[24px] bg-gradient-to-br justify-between bg-gradient-to-br from-[#1447E6] to-[rgba(127,156,219,0.82)] shadow-[0_10px_15px_-3px_rgba(0,0,0,0.10),_0_4px_6px_-4px_rgba(0,0,0,0.10)]">
@@ -52,8 +53,8 @@ const Home =()=>{
                 <InfoBox type='revenue' data={0}/>
             </div>
             <div className='flex flex-row gap-3'>
-              <MenuBox icon="/icons/home/buy.png" title="주식 사기" description="종목 둘러보기"/>
-              <MenuBox icon="/icons/home/myAsset.png" title="내 자산" description="보유 현황 보기"/>
+              <MenuBox icon="/icons/home/buy.png" title="주식 사기" description="종목 둘러보기" onLanding={()=>navigate('/list')}/>
+              <MenuBox icon="/icons/home/myAsset.png" title="내 자산" description="보유 현황 보기" onLanding={()=>navigate('/assets')}/>
             </div>
             
         </div>
