@@ -37,7 +37,7 @@ const List =() =>{
             
 
 
-             <div className="fixed top-[5rem] w-full z-20 px-[2rem] bg-[#F9FAFB] pt-[1rem] pb-[1rem]">
+             <div className="fixed top-[3.9rem] w-full z-20 px-[2rem] bg-[#F9FAFB] pt-[1rem] pb-[1rem]">
                  <div className="flex flex-col gap-[0.4rem] mb-[2rem] mt-[2rem]">
                     <h2 className="text-[2.4rem] font-bold">🛒 주식 종목</h2>
                     <span className="text-[1.6rem] font-normal text-[#4A5565]">마음에 드는 종목에 투자해보세요!</span>
