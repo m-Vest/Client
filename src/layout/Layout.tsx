@@ -2,7 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import TabBar from './tabbar/TabBar';
 import { ROUTES_CONFIG } from '../routes/routesConfig';
-
+import ScrollToTop from '../ScrollToTop';
 const Layout = () => {
   const location = useLocation();
 
@@ -30,6 +30,8 @@ const Layout = () => {
             }}
             className="absolute inset-0"
           >
+
+            <ScrollToTop />
             <Outlet />
           </motion.div>
         </AnimatePresence>
