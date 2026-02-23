@@ -66,7 +66,7 @@ const Asset = ()=>{
            </div>
             <div className="relative w-full ">
                <div className="absolute w-full top-[-3rem]">
-                    <div className="pt-[7rem] pb-[3rem] px-[2rem] rounded-[16px] border border-[#FFF085] bg-gradient-to-br from-[#FEFCE8] to-[#FFF7ED] flex flex-row gap-[1.2rem]">
+                    <div className="pt-[5.7rem] pb-[3rem] px-[2rem] rounded-[16px] border border-[#FFF085] bg-gradient-to-br from-[#FEFCE8] to-[#FFF7ED] flex flex-row gap-[1.2rem]">
                        <img src={ideaImg} className="w-[4rem] h-[4rem]"/>
                        <div className="flex flex-col gap-[0.4rem]">
                             <h1 className="text-[1.7rem] font-bold">투자 꿀팁</h1>
