@@ -9,7 +9,7 @@ interface OrderModalProps {
     myAsset: number;
     onClose: () => void
 }
-const OrderModal = ({stockName, stockCode, stockPrice, myAsset, onClose}: OrderModalProps) => {
+const BuyModal = ({stockName, stockCode, stockPrice, myAsset, onClose}: OrderModalProps) => {
     const [quantity, setQuantity] = useState(1)
     const price = stockPrice || 128000
     const maxQuantity = Math.floor((myAsset || 0) / price)
@@ -62,4 +62,4 @@ const OrderModal = ({stockName, stockCode, stockPrice, myAsset, onClose}: OrderM
         </div>
     )
 }
-export default OrderModal;
+export default BuyModal;

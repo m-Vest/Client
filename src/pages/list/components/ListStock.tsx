@@ -5,8 +5,9 @@ interface ListStockProps {
     price: number;
     dir: 'up' | 'down';
     change: number;
+    onType?: (type: 'buy' | 'sell') => void;
 }
-const ListStock = ({name, price, dir, change}: ListStockProps) => {
+const ListStock = ({name, price, dir, change, onType}: ListStockProps) => {
     return (
         <div className="flex flex-col p-[1.8rem] rounded-[16px] border-[1.726px] border-gray-100 bg-white shadow-sm">
                <div className='flex flex-row gap-[1.2rem] items-center'>
@@ -23,8 +24,8 @@ const ListStock = ({name, price, dir, change}: ListStockProps) => {
                     </div>
                </div>
                 <div className='mt-[1.6rem] flex flex-row w-full justify-between items-center gap-[0.8rem]'>
-                    <button className='active:scale-95 transition-transform disabled:opacity-50 w-full py-[1.2rem] rounded-[14px] bg-[#155DFC] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.10),_0_2px_4px_-2px_rgba(0,0,0,0.10)] text-[1.5rem] text-white font-bold'>사기</button>
-                    <button className='active:scale-95 transition-transform disabled:opacity-50 w-full py-[1.2rem] rounded-[14px] bg-[#F3F4F6] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.10),_0_2px_4px_-2px_rgba(0,0,0,0.10)] text-[1.5rem] text-black font-bold'>팔기</button>
+                    <button className='active:scale-95 transition-transform disabled:opacity-50 w-full py-[1.2rem] rounded-[14px] bg-[#155DFC] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.10),_0_2px_4px_-2px_rgba(0,0,0,0.10)] text-[1.5rem] text-white font-bold' onClick={() => onType && onType('buy')}>사기</button>
+                    <button className='active:scale-95 transition-transform disabled:opacity-50 w-full py-[1.2rem] rounded-[14px] bg-[#F3F4F6] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.10),_0_2px_4px_-2px_rgba(0,0,0,0.10)] text-[1.5rem] text-black font-bold' onClick={() => onType && onType('sell')}>팔기</button>
                 </div>
             </div>
     )
