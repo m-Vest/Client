@@ -14,7 +14,7 @@ const List =() =>{
         { id: 4, name: "삼성전기", price: 412000, dir: "down" as const, change: -8000 },
         { id: 5, name: "SK하이닉스", price: 120000, dir: "up" as const, change: 2500 },
     ];
-
+   
     const filteredStocks = mockStocks.filter((stock) =>
         stock.name.toLowerCase().includes(keyword.toLowerCase())
         );
