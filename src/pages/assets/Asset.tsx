@@ -49,7 +49,7 @@ const Asset = ()=>{
         }
     ]
     return (
-        <div className="pt-[3.2rem] pb-[8rem] flex flex-col justify-between bg-[#F9FAFB] flex flex-col justify-start">
+        <div className="pt-[7.2rem] pb-[8rem] flex flex-col justify-between bg-[#F9FAFB] flex flex-col justify-start">
              <div className="flex flex-col px-[2rem] gap-[0.4rem]">
                 <h2 className="text-[2.4rem] font-bold">💼 내 자산</h2>
                 <span className="text-[1.6rem] font-normal text-[#4A5565]">보유 중인 주식을 확인해보세요</span>
