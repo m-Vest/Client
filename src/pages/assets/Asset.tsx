@@ -1,6 +1,12 @@
 import ideaImg from '/icons/assets/idea.png';
 import MyAsset from './components/MyAsset';
+import { useState } from 'react';
+import { INVEST_TIPS } from "../../constants/investmentTips";
 const Asset = ()=>{
+    const [randomTip] = useState(() =>
+    INVEST_TIPS[Math.floor(Math.random() * INVEST_TIPS.length)]
+    );
+
     const stocKList = [
         {
             stockName: 'SK 하이닉스',
@@ -49,7 +55,7 @@ const Asset = ()=>{
         }
     ]
     return (
-        <div className="pt-[3.2rem] pb-[8rem] flex flex-col justify-between bg-[#F9FAFB] flex flex-col justify-start">
+        <div className="pt-[7.2rem] pb-[8rem] flex flex-col justify-between bg-[#F9FAFB] flex flex-col justify-start">
              <div className="flex flex-col px-[2rem] gap-[0.4rem]">
                 <h2 className="text-[2.4rem] font-bold">💼 내 자산</h2>
                 <span className="text-[1.6rem] font-normal text-[#4A5565]">보유 중인 주식을 확인해보세요</span>
@@ -70,7 +76,7 @@ const Asset = ()=>{
                        <img src={ideaImg} className="w-[4rem] h-[4rem]"/>
                        <div className="flex flex-col gap-[0.4rem]">
                             <h1 className="text-[1.7rem] font-bold">투자 꿀팁</h1>
-                            <h3 className="text-[1.4rem] text-[#364153] font-medium">분산 투자를 해보세요!<br/>여러 종목에 나눠 투자하면 리스크를 줄일 수 있어요.</h3>
+                            <h3 className="text-[1.4rem] text-[#364153] font-medium whitespace-pre-line">{randomTip}</h3>
                        </div>
                     </div>
 

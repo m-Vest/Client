@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import TabBar from './tabbar/TabBar';
+import Header from './header/Header';
 import { ROUTES_CONFIG } from '../routes/routesConfig';
 import ScrollToTop from '../ScrollToTop';
 const Layout = () => {
@@ -12,6 +13,10 @@ const Layout = () => {
     location.pathname.startsWith(ROUTES_CONFIG.namePage.path) ||
     location.pathname.startsWith(ROUTES_CONFIG.order.path);
 
+  const isShowHeader = 
+    location.pathname.startsWith(ROUTES_CONFIG.home.path) ||
+    location.pathname.startsWith(ROUTES_CONFIG.assets.path) ||
+    location.pathname.startsWith(ROUTES_CONFIG.list.path);
   return (
     <div className="min-h-dvh w-full flex justify-center">
       <main
@@ -19,6 +24,7 @@ const Layout = () => {
           isSidebarHidden ? '' : 'pb-[7rem]'
         }`}
       >
+        {isShowHeader && <Header />}
         <AnimatePresence mode="wait">
           <motion.div
              key={location.pathname}
