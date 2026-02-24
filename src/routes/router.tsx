@@ -9,19 +9,13 @@ import List from '../pages/list/List';
 import KakaoRedirect from '../pages/login/auth/KakaoLogin'; 
 import Asset from '../pages/assets/Asset';
 import Order from '../pages/order/Order';
+import ProtectRoute from './ProtectRoute';
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
     children: [
-      {
-        path: ROUTES_CONFIG.home.path,
-        element: <Home />,
-      },
-      {
-        path: ROUTES_CONFIG.list.path,
-        element: <List />,
-      },
+      // 🔓 로그인 필요 없는 애들
       {
         path: ROUTES_CONFIG.login.path,
         element: <Login />,
@@ -35,16 +29,31 @@ export const router = createBrowserRouter([
         element: <NamePage />,
       },
       {
-       path: ROUTES_CONFIG.kakaoAuth.path,
-       element: <KakaoRedirect />,
+        path: ROUTES_CONFIG.kakaoAuth.path,
+        element: <KakaoRedirect />,
       },
+
+      // 🔒 로그인 필요한 애들
       {
-       path: ROUTES_CONFIG.order.path,
-       element: <Order />,
-      },
-      {
-       path: ROUTES_CONFIG.assets.path,
-       element: <Asset />,
+        element: <ProtectRoute />,
+        children: [
+          {
+            path: ROUTES_CONFIG.home.path,
+            element: <Home />,
+          },
+          {
+            path: ROUTES_CONFIG.list.path,
+            element: <List />,
+          },
+          {
+            path: ROUTES_CONFIG.order.path,
+            element: <Order />,
+          },
+          {
+            path: ROUTES_CONFIG.assets.path,
+            element: <Asset />,
+          },
+        ],
       },
     ],
   },

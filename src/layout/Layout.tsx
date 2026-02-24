@@ -13,10 +13,10 @@ const Layout = () => {
     location.pathname.startsWith(ROUTES_CONFIG.namePage.path) ||
     location.pathname.startsWith(ROUTES_CONFIG.order.path);
 
-  const isShowHeader = 
-    location.pathname.startsWith(ROUTES_CONFIG.home.path) ||
-    location.pathname.startsWith(ROUTES_CONFIG.assets.path) ||
-    location.pathname.startsWith(ROUTES_CONFIG.list.path);
+  const isShowHeader =
+    location.pathname === ROUTES_CONFIG.home.path ||
+    location.pathname === ROUTES_CONFIG.assets.path ||
+    location.pathname === ROUTES_CONFIG.list.path;
   return (
     <div className="min-h-dvh w-full flex justify-center">
       <main
