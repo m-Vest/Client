@@ -62,7 +62,7 @@ const Order = () =>{
                     </div>
                 </div>
             </div>
-            <div className="flex flex-row gap-[1.2rem] p-[2rem] bg-white w-full fixed bottom-0 z-10 rounded-t-[16px] border-t border-t-[#E5E7EB]">
+            <div className="max-w-[500px] flex flex-row gap-[1.2rem] p-[2rem] bg-white w-full fixed bottom-0 z-10 rounded-t-[16px] border-t border-t-[#E5E7EB]">
                 <button className="py-[1.57rem] w-full bg-[#155DFC] text-white rounded-[16px] text-[1.6rem] font-bold" onClick={() => setIsBuyOpen(true)}>매도</button>
                 <button className="py-[1.57rem] w-full bg-[#E7000B] text-white rounded-[16px] text-[1.6rem] font-bold" onClick={() => setIsSellOpen(true)}>매수</button>
             </div>

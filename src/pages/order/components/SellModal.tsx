@@ -24,7 +24,7 @@ const SellModal = ({stockName, stockCode, stockPrice, myStockCount, onClose}: Or
         };
     }
     return (
-        <div className="fixed top-0 z-27 w-full h-full bg-[#00000080]">
+        <div className="max-w-[500px] fixed top-0 z-102 w-full h-full bg-[#00000080]">
             <div className="relative w-full h-full">
                 <div className="absolute bottom-0 rounded-t-[32px] bg-white  w-full py-[2rem]">
                     <div className="flex flex-row justify-between items-center border-b border-b-[#F3F4F6] px-[2.4rem] pb-[2rem] pt-[1rem]">
