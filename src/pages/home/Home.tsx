@@ -5,7 +5,7 @@ import InfoBox from './components/InfoBox';
 import { useNavigate } from 'react-router-dom';
 import { INVEST_CHEERS } from '../../constants/investmentCheers';
 import { useState } from 'react';
-import MyAsset from '../assets/components/MyAsset';
+import Logout from './components/Logout';
 const Home =()=>{
     const navigate = useNavigate();
     const nickname = localStorage.getItem('nickname') || '투자왕님';
@@ -18,10 +18,7 @@ const Home =()=>{
                     <h2 className="text-[2.4rem] font-bold">👤 {nickname} <span className='text-[2.4rem] font-medium'>님</span></h2>
                     <span className="text-[1.6rem] font-normal text-[#4A5565]">오늘도 투자 레벨업하러 오셨네요!</span>
                 </div>
-                <button className='flex flex-row gap-[0.2rem] justify-start pl-[0.8rem] items-center w-[12rem] h-[3.8rem] bg-white text-center  border border-gray-300 font-bold shadow-2xl rounded-2xl cursor-pointer'>
-                    <img src="https://cdn-icons-png.flaticon.com/512/8212/8212701.png" className='w-[2.7rem]'/>
-                    <span className='text-[1.2rem] text-[#4A5565]'>로그아웃</span>
-                </button>
+                <Logout/>
             </div>
             
             <div className="p-[2.4rem] flex flex-col rounded-[24px] bg-gradient-to-br justify-between bg-gradient-to-br from-[#1447E6] to-[rgba(127,156,219,0.82)] shadow-[0_10px_15px_-3px_rgba(0,0,0,0.10),_0_4px_6px_-4px_rgba(0,0,0,0.10)]">
