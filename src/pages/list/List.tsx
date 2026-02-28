@@ -2,21 +2,21 @@ import ListStock from "./components/ListStock";
 import { useState } from "react";
 import SellModal from "../order/components/SellModal";
 import BuyModal from "../order/components/BuyModal";
+import { useGetStockList } from "../../apis/query/useGetStockList";
 const List =() =>{
     const [keyword, setKeyword] = useState("");
     const [isSellOpen, setIsSellOpen] = useState(false);
     const [isBuyOpen, setIsBuyOpen] = useState(false);
     const [isFixed, setIsFixed] = useState(false);
-    const mockStocks = [
-        { id: 1, name: "삼성전자", price: 75000, dir: 1, change: 500 },
-        { id: 2, name: "카카오", price: 48200, dir: -1, change: -1200 },
-        { id: 3, name: "네이버", price: 214000, dir: 1, change: 3500 },
-        { id: 4, name: "삼성전기", price: 412000, dir: -1, change: -8000 },
-        { id: 5, name: "SK하이닉스", price: 120000, dir: 1, change: 2500 },
-    ];
+    const { stockList, isLoading, isError } = useGetStockList();
+
+    if (isLoading) return <div>로딩중...</div>;
+    if (isError) return <div>에러 발생</div>;
+    console.log(stockList)
+    const mockStocks = stockList;
    
     const filteredStocks = mockStocks.filter((stock) =>
-        stock.name.toLowerCase().includes(keyword.toLowerCase())
+        stock.stockName.toLowerCase().includes(keyword.toLowerCase())
         );
     
     const OpenModalType = (type: 'buy' | 'sell') => {
@@ -53,13 +53,15 @@ const List =() =>{
 
             <div className="max-w-[500px] w-full flex flex-col px-[2rem] pt-[15rem] gap-[0.8rem]">
 
+
+
                 {filteredStocks.length > 0 ? (
                 filteredStocks.map((stock) => (
                     <ListStock
-                    key={stock.id}
-                    name={stock.name}
+                    key={stock.stockCode}
+                    name={stock.stockName}
                     price={stock.price}
-                    dir={stock.dir}
+                    dir={stock.changeRate}
                     change={stock.change}
                     onType={(type) => OpenModalType(type)}
                     />
