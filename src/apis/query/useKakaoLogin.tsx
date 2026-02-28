@@ -29,7 +29,8 @@ export const useKakaoLogin = () => {
       }
 
       if (data.data.jwtToken) {
-        localStorage.setItem('accessToken', data.data.jwtToken);
+        localStorage.setItem('accessToken', data.data.jwtToken.accessToken);
+        localStorage.setItem('refreshToken', data.data.jwtToken.refreshToken);
         navigate(ROUTES_CONFIG.home.path);
         return;
       }
