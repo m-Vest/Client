@@ -10,7 +10,7 @@ const Home =()=>{
     const navigate = useNavigate();
     const nickname = localStorage.getItem('nickname') || '투자왕님';
     const [randomCheer] = useState(() =>INVEST_CHEERS[Math.floor(Math.random() * INVEST_CHEERS.length)]);
-    const [myAsset, setMyAsset] = useState(10000000);
+    const myAsset = 10000000;
     return (
         <div className="pt-[7.2rem] pb-[8rem] px-[2rem] flex flex-col gap-[2.3rem] justify-between bg-[#F9FAFB]">
             <div className='flex flex-row justify-between items-center'>

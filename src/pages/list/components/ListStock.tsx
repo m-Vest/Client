@@ -3,7 +3,7 @@ import downRatio from '/icons/home/downRatio.svg';
 interface ListStockProps {
     name: string;
     price: number;
-    dir: 'up' | 'down';
+    dir: number;
     change: number;
     onType?: (type: 'buy' | 'sell') => void;
 }
@@ -17,8 +17,8 @@ const ListStock = ({name, price, dir, change, onType}: ListStockProps) => {
                         <div className='flex flex-row gap-[0.8rem] items-center'>
                             <h3 className='text-[#6A7282] text-[1.4rem] font-semibold'>{price.toLocaleString()}원</h3>
                             <div className='flex flex-row gap-[0.3rem] items-center'>
-                                <img src={dir === 'up' ? upRatio : downRatio} className='w-[1.2rem] h-auto'/>
-                                <span className={`text-[1.2rem] font-bold mt-[-0.2rem] ${dir === 'up' ? 'text-[#E7000B]' : 'text-[#155DFC]'}`}>{change.toLocaleString()}원</span>
+                                <img src={dir >= 0  ? upRatio : downRatio} className='w-[1.2rem] h-auto'/>
+                                <span className={`text-[1.2rem] font-bold mt-[-0.2rem] ${dir >= 0 ? 'text-[#E7000B]' : 'text-[#155DFC]'}`}>{change.toLocaleString()}원</span>
                             </div>
                         </div>
                     </div>
