@@ -8,11 +8,11 @@ const List =() =>{
     const [isBuyOpen, setIsBuyOpen] = useState(false);
     const [isFixed, setIsFixed] = useState(false);
     const mockStocks = [
-        { id: 1, name: "삼성전자", price: 75000, dir: "up" as const, change: 500 },
-        { id: 2, name: "카카오", price: 48200, dir: "down" as const, change: -1200 },
-        { id: 3, name: "네이버", price: 214000, dir: "up" as const, change: 3500 },
-        { id: 4, name: "삼성전기", price: 412000, dir: "down" as const, change: -8000 },
-        { id: 5, name: "SK하이닉스", price: 120000, dir: "up" as const, change: 2500 },
+        { id: 1, name: "삼성전자", price: 75000, dir: 1, change: 500 },
+        { id: 2, name: "카카오", price: 48200, dir: -1, change: -1200 },
+        { id: 3, name: "네이버", price: 214000, dir: 1, change: 3500 },
+        { id: 4, name: "삼성전기", price: 412000, dir: -1, change: -8000 },
+        { id: 5, name: "SK하이닉스", price: 120000, dir: 1, change: 2500 },
     ];
    
     const filteredStocks = mockStocks.filter((stock) =>

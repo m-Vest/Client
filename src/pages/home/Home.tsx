@@ -5,21 +5,26 @@ import InfoBox from './components/InfoBox';
 import { useNavigate } from 'react-router-dom';
 import { INVEST_CHEERS } from '../../constants/investmentCheers';
 import { useState } from 'react';
+import Logout from './components/Logout';
 const Home =()=>{
     const navigate = useNavigate();
     const nickname = localStorage.getItem('nickname') || '투자왕님';
     const [randomCheer] = useState(() =>INVEST_CHEERS[Math.floor(Math.random() * INVEST_CHEERS.length)]);
+    const myAsset = 10000000;
     return (
         <div className="pt-[7.2rem] pb-[8rem] px-[2rem] flex flex-col gap-[2.3rem] justify-between bg-[#F9FAFB]">
-            <div className="flex flex-col gap-[0.4rem]">
-                <h2 className="text-[2.4rem] font-bold">👤 {nickname} <span className='text-[2.4rem] font-medium'>님</span></h2>
-                <span className="text-[1.6rem] font-normal text-[#4A5565]">오늘도 투자 레벨업하러 오셨네요!</span>
+            <div className='flex flex-row justify-between items-center'>
+                <div className="flex flex-col gap-[0.4rem] w-[90%]">
+                    <h2 className="text-[2.4rem] font-bold">👤 {nickname} <span className='text-[2.4rem] font-medium'>님</span></h2>
+                    <span className="text-[1.6rem] font-normal text-[#4A5565]">오늘도 투자 레벨업하러 오셨네요!</span>
+                </div>
+                <Logout/>
             </div>
             
             <div className="p-[2.4rem] flex flex-col rounded-[24px] bg-gradient-to-br justify-between bg-gradient-to-br from-[#1447E6] to-[rgba(127,156,219,0.82)] shadow-[0_10px_15px_-3px_rgba(0,0,0,0.10),_0_4px_6px_-4px_rgba(0,0,0,0.10)]">
                 <span className="text-[#DBEAFE] text-[1.4rem]">💰 현재 내 자산</span>
                 <div className="flex flex-row items-center gap-2 pb-[1.2rem] border-b border-[#F3F4F6]">
-                    <span className="text-[#FFF] text-[3.6rem] font-bold">1000000</span>
+                    <span className="text-[#FFF] text-[3.6rem] font-bold">{myAsset.toLocaleString()}</span>
                     <span className="text-[#FFF] text-[2rem] font-normal">원</span>
                 </div>
                 <div className="flex flex-row justify-between items-center gap-2 pt-[1.6rem]">
