@@ -8,8 +8,11 @@ const List =() =>{
     const [isSellOpen, setIsSellOpen] = useState(false);
     const [isBuyOpen, setIsBuyOpen] = useState(false);
     const [isFixed, setIsFixed] = useState(false);
+    const [stockCode, setStockCode] = useState('0');
+    const [stockName, setStockName] = useState('');
+    const [stockPrice, setStockPrice] = useState(0);
     const { stockList, isLoading, isError } = useGetStockList();
-
+    
     if (isLoading) return <div>로딩중...</div>;
     if (isError) return <div>에러 발생</div>;
     console.log(stockList)
@@ -19,8 +22,11 @@ const List =() =>{
         stock.stockName.toLowerCase().includes(keyword.toLowerCase())
         );
     
-    const OpenModalType = (type: 'buy' | 'sell') => {
+    const OpenModalType = (type: 'buy' | 'sell', stockNumCode: string, stockStrName:string, stockNumPrice: number) => {
         setIsFixed(true);
+        setStockCode(stockNumCode);
+        setStockName(stockStrName);
+        setStockPrice(stockNumPrice);
         if (type === 'buy') {
             setIsBuyOpen(true);
         } else {
@@ -31,8 +37,8 @@ const List =() =>{
 
     return (
         <div className="pt-[8.2rem] pb-[8rem] bg-[#F9FAFB]">
-            {isBuyOpen && <BuyModal stockName="삼성전자" stockCode="000660" stockPrice={128000} myAsset={1000000} onClose={() => {setIsBuyOpen(false); setIsFixed(false);}}/>}
-            {isSellOpen && <SellModal stockName="삼성전자" stockCode="000660" stockPrice={128000} myStockCount={3} onClose={() => {setIsSellOpen(false); setIsFixed(false);}}/>}
+            {isBuyOpen && <BuyModal stockName={stockName} stockCode={stockCode} stockPrice={stockPrice} myAsset={1000000} onClose={() => {setIsBuyOpen(false); setIsFixed(false);}}/>}
+            {isSellOpen && <SellModal stockName={stockName} stockCode={stockCode} stockPrice={stockPrice} myStockCount={3} onClose={() => {setIsSellOpen(false); setIsFixed(false);}}/>}
            <div className={`w-full h-full flex flex-col gap-[2.4rem] justify-between ${isFixed ? 'fixed' : ''} `}>
             
 
@@ -63,7 +69,7 @@ const List =() =>{
                     price={stock.price}
                     dir={stock.changeRate}
                     change={stock.change}
-                    onType={(type) => OpenModalType(type)}
+                    onType={(type) => OpenModalType(type,stock.stockCode,stock.stockName,stock.price)}
                     />
                 ))
                 ) : (

@@ -10,12 +10,12 @@ interface OrderModalProps {
     onClose: () => void
 }
 const BuyModal = ({stockName, stockCode, stockPrice, myAsset, onClose}: OrderModalProps) => {
-    const [quantity, setQuantity] = useState(1)
+    const [quantity, setQuantity] = useState(0);
     const price = stockPrice || 128000
     const maxQuantity = Math.floor((myAsset || 0) / price)
 
     const handleMinus = () => {
-        setQuantity(prev => Math.max(1, prev - 1))
+        setQuantity(prev => Math.max(0, prev - 1))
     }
 
     const handlePlus = () => {

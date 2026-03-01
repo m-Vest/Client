@@ -10,7 +10,7 @@ interface OrderModalProps {
     onClose: () => void
 }
 const SellModal = ({stockName, stockCode, stockPrice, myStockCount, onClose}: OrderModalProps) => {
-    const [quantity, setQuantity] = useState(1)
+    const [quantity, setQuantity] = useState(0)
     const price = stockPrice;
     const maxQuantity = myStockCount || 0;
 
