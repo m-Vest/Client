@@ -1,7 +1,7 @@
 import closeIcon from '/icons/order/close.svg'
 import plusIcon from '/icons/order/plus.svg'
 import minusIcon from '/icons/order/minus.svg'
-import { useState } from 'react'
+import { useState } from 'react';
 interface OrderModalProps {
     stockName: string;
     stockCode: string;
