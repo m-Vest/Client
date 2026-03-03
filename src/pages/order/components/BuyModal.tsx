@@ -3,11 +3,13 @@ import plusIcon from '/icons/order/plus.svg'
 import minusIcon from '/icons/order/minus.svg'
 import { useState } from 'react';
 import { useStockInfo } from '../../../apis/query/useStockInfo';
+import { usePostOrder } from '../../../apis/query/usePostOrder';
 interface OrderModalProps {
     stockCode: string;
     onClose: () => void
 }
 const BuyModal = ({stockCode,onClose}: OrderModalProps) => {
+    const { mutate: createOrder } = usePostOrder();
     const [quantity, setQuantity] = useState(0);
     const { stock } = useStockInfo(stockCode);
     const price = stock?.price ?? 0;
@@ -22,6 +24,26 @@ const BuyModal = ({stockCode,onClose}: OrderModalProps) => {
     const handlePlus = () => {
         setQuantity(prev => Math.min(maxQuantity, prev + 1))
     }
+
+    const handleOrder = () => {
+        if (quantity <= 0) return; 
+        createOrder(
+            {
+            stockCode: stock?.stockCode || '0',
+            orderType: "BUY",
+            price: stock?.price || 0,
+            quantity: quantity,
+            },
+            {
+            onSuccess: (data) => {
+                console.log("주문 성공", data);
+            },
+            onError: (error) => {
+                console.error("주문 실패", error);
+            },
+            }
+        );
+    };
     
     return (
         <div className="max-w-[500px] fixed top-0 z-102 w-full h-full bg-[#00000080]">
@@ -53,7 +75,7 @@ const BuyModal = ({stockCode,onClose}: OrderModalProps) => {
                             </div>
                             <div className='text-[#6A7282] text-[1.4rem] font-normal mt-[1.9rem]'> {price.toLocaleString()}원 × {quantity}주</div>
                         </div>
-                        <button className='w-full mt-[3.2rem] rounded-[16px] bg-[#155DFC] text-white text-[1.6rem] font-bold py-[1.6rem]' onClick={onClose}>
+                        <button className='w-full mt-[3.2rem] rounded-[16px] bg-[#155DFC] text-white text-[1.6rem] font-bold py-[1.6rem]' onClick={()=>{onClose(); handleOrder();}}>
                             매수하기
                         </button>
                     </div>

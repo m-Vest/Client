@@ -3,11 +3,13 @@ import plusIcon from '/icons/order/plus.svg'
 import minusIcon from '/icons/order/minus.svg'
 import { useState } from 'react';
 import { useStockInfo } from '../../../apis/query/useStockInfo';
+import { usePostOrder } from '../../../apis/query/usePostOrder';
 interface OrderModalProps {
     stockCode: string;
     onClose: () => void
 }
 const SellModal = ({ stockCode, onClose}: OrderModalProps) => {
+    const { mutate: createOrder } = usePostOrder();
     const [quantity, setQuantity] = useState(0)
     const { stock } = useStockInfo(stockCode);
     const price = stock?.price ?? 0;
@@ -21,6 +23,25 @@ const SellModal = ({ stockCode, onClose}: OrderModalProps) => {
             setQuantity(prev => prev + 1)
         };
     }
+    const handleOrder = () => {
+        if (quantity <= 0) return; 
+        createOrder(
+            {
+            stockCode: stock?.stockCode || '0',
+            orderType: "SELL",
+            price: stock?.price || 0,
+            quantity: quantity,
+            },
+            {
+            onSuccess: (data) => {
+                console.log("팔기 성공", data);
+            },
+            onError: (error) => {
+                console.error("팔기 실패", error);
+            },
+            }
+        );
+    };
     return (
         <div className="max-w-[500px] fixed top-0 z-102 w-full h-full bg-[#00000080]">
             <div className="relative w-full h-full">
@@ -51,7 +72,7 @@ const SellModal = ({ stockCode, onClose}: OrderModalProps) => {
                             </div>
                             <div className='text-[#6A7282] text-[1.4rem] font-normal mt-[1.9rem]'> {price.toLocaleString()}원 × {quantity}주</div>
                         </div>
-                        <button className='w-full mt-[3.2rem] rounded-[16px] bg-[#E7000B] text-white text-[1.6rem] font-bold py-[1.6rem]' onClick={onClose}>
+                        <button className='w-full mt-[3.2rem] rounded-[16px] bg-[#E7000B] text-white text-[1.6rem] font-bold py-[1.6rem]' onClick={()=>{onClose(); handleOrder();}}>
                             매도하기
                         </button>
                     </div>
