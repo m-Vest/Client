@@ -1,5 +1,5 @@
 import ListStock from "./components/ListStock";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import SellModal from "../order/components/SellModal";
 import BuyModal from "../order/components/BuyModal";
 import { useGetStockList } from "../../apis/query/useGetStockList";
@@ -11,14 +11,15 @@ const List =() =>{
     const [stockCode, setStockCode] = useState('0');
     const { stockList, isLoading, isError } = useGetStockList();
     
+    const filteredStocks = useMemo(() => {
+        return stockList.filter((stock) =>
+            stock.stockName.toLowerCase().includes(keyword.toLowerCase())
+        );
+        }, [stockList, keyword]);
+    
     if (isLoading) return <div>로딩중...</div>;
     if (isError) return <div>에러 발생</div>;
     console.log(stockList)
-    const mockStocks = stockList;
-   
-    const filteredStocks = mockStocks.filter((stock) =>
-        stock.stockName.toLowerCase().includes(keyword.toLowerCase())
-        );
     
     const OpenModalType = (type: 'buy' | 'sell', stockNumCode: string) => {
         setIsFixed(true);
