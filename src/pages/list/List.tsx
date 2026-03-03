@@ -10,16 +10,24 @@ const List =() =>{
     const [isFixed, setIsFixed] = useState(false);
     const [stockCode, setStockCode] = useState('0');
     const { stockList, isLoading, isError } = useGetStockList();
-    
+    const [page, setPage] = useState(1);
+    const PAGE_SIZE = 5;
     const filteredStocks = useMemo(() => {
         return stockList.filter((stock) =>
             stock.stockName.toLowerCase().includes(keyword.toLowerCase())
         );
         }, [stockList, keyword]);
     
+    const paginatedStocks = useMemo(() => {
+        const start = (page - 1) * PAGE_SIZE;
+        const end = start + PAGE_SIZE;
+        return filteredStocks.slice(start, end);
+    }, [filteredStocks, page]);
+    const totalPages = Math.ceil(filteredStocks.length / PAGE_SIZE);
+    
     if (isLoading) return <div>로딩중...</div>;
     if (isError) return <div>에러 발생</div>;
-    console.log(stockList)
+    console.log(stockList);
     
     const OpenModalType = (type: 'buy' | 'sell', stockNumCode: string) => {
         setIsFixed(true);
@@ -30,7 +38,6 @@ const List =() =>{
             setIsSellOpen(true);
         }
     };
-
 
     return (
         <div className="pt-[8.2rem] pb-[8rem] bg-[#F9FAFB]">
@@ -54,26 +61,45 @@ const List =() =>{
                 />
             </div>
 
-            <div className="max-w-[500px] w-full flex flex-col px-[2rem] pt-[15rem] gap-[0.8rem]">
+            <div className="max-w-[500px] w-full flex flex-col px-[2rem] pt-[13.7rem] gap-[0.8rem]">
 
+                <div className="flex justify-center gap-[1rem] mb-[1rem] items-center">
+                    <button
+                        disabled={page === 1}
+                        onClick={() => setPage(prev => prev - 1)}
+                        className="text-center text-[2rem] text-gray-500"
+                    >
+                        ◀︎
+                    </button>
 
+                    <span className="text-[1.2rem] font-bold text-gray-500">{page} / {totalPages}</span>
+
+                    <button
+                        disabled={page === totalPages}
+                        onClick={() => setPage(prev => prev + 1)}
+                        className="text-center text-[2rem] text-gray-500"
+                    >
+                        ▶ 
+                    </button>
+                </div>
 
                 {filteredStocks.length > 0 ? (
-                filteredStocks.map((stock) => (
-                    <ListStock
-                    key={stock.stockCode}
-                    name={stock.stockName}
-                    price={stock.price}
-                    dir={stock.changeRate}
-                    change={stock.change}
-                    onType={(type) => OpenModalType(type,stock.stockCode)}
-                    />
-                ))
+                    paginatedStocks.map((stock) => (
+                        <ListStock
+                            key={stock.stockCode}
+                            name={stock.stockName}
+                            price={stock.price}
+                            dir={stock.changeRate}
+                            change={stock.change}
+                            onType={(type) => OpenModalType(type, stock.stockCode)}
+                        />
+                    ))
                 ) : (
                 <div className="py-[3rem] text-center text-[1.4rem] text-gray-400">
                     🔎 검색 결과가 없습니다.
                 </div>
                 )}
+                
             </div>   
            </div>
         </div>
