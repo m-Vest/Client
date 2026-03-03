@@ -1,3 +1,4 @@
+import React from 'react';
 import upRatio from '/icons/home/upRatio.svg';
 import downRatio from '/icons/home/downRatio.svg';
 interface ListStockProps {
@@ -30,4 +31,4 @@ const ListStock = ({name, price, dir, change, onType}: ListStockProps) => {
             </div>
     )
 }
-export default ListStock;
+export default React.memo(ListStock);

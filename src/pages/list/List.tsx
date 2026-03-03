@@ -11,7 +11,9 @@ const List =() =>{
     const [stockCode, setStockCode] = useState('0');
     const { stockList, isLoading, isError } = useGetStockList();
     const [page, setPage] = useState(1);
+    
     const PAGE_SIZE = 5;
+    
     const filteredStocks = useMemo(() => {
         return stockList.filter((stock) =>
             stock.stockName.toLowerCase().includes(keyword.toLowerCase())
@@ -38,6 +40,7 @@ const List =() =>{
             setIsSellOpen(true);
         }
     };
+    
 
     return (
         <div className="pt-[8.2rem] pb-[8rem] bg-[#F9FAFB]">
@@ -56,7 +59,10 @@ const List =() =>{
                     type="text"
                     placeholder="종목명을 입력하세요"
                     value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}
+                    onChange={(e) => {
+                        setKeyword(e.target.value);
+                        setPage(1);
+                    }}
                     className="w-full p-[1.2rem] rounded-[12px] border bg-white border-gray-200 text-[1.4rem] focus:outline-none focus:ring-2 focus:ring-[#155DFC]"
                 />
             </div>
