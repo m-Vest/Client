@@ -9,8 +9,6 @@ const List =() =>{
     const [isBuyOpen, setIsBuyOpen] = useState(false);
     const [isFixed, setIsFixed] = useState(false);
     const [stockCode, setStockCode] = useState('0');
-    const [stockName, setStockName] = useState('');
-    const [stockPrice, setStockPrice] = useState(0);
     const { stockList, isLoading, isError } = useGetStockList();
     
     if (isLoading) return <div>로딩중...</div>;
@@ -22,11 +20,9 @@ const List =() =>{
         stock.stockName.toLowerCase().includes(keyword.toLowerCase())
         );
     
-    const OpenModalType = (type: 'buy' | 'sell', stockNumCode: string, stockStrName:string, stockNumPrice: number) => {
+    const OpenModalType = (type: 'buy' | 'sell', stockNumCode: string) => {
         setIsFixed(true);
         setStockCode(stockNumCode);
-        setStockName(stockStrName);
-        setStockPrice(stockNumPrice);
         if (type === 'buy') {
             setIsBuyOpen(true);
         } else {
@@ -37,8 +33,8 @@ const List =() =>{
 
     return (
         <div className="pt-[8.2rem] pb-[8rem] bg-[#F9FAFB]">
-            {isBuyOpen && <BuyModal stockName={stockName} stockCode={stockCode} stockPrice={stockPrice} myAsset={1000000} onClose={() => {setIsBuyOpen(false); setIsFixed(false);}}/>}
-            {isSellOpen && <SellModal stockName={stockName} stockCode={stockCode} stockPrice={stockPrice} myStockCount={3} onClose={() => {setIsSellOpen(false); setIsFixed(false);}}/>}
+            {isBuyOpen && <BuyModal stockCode={stockCode} onClose={() => {setIsBuyOpen(false); setIsFixed(false);}}/>}
+            {isSellOpen && <SellModal stockCode={stockCode} onClose={() => {setIsSellOpen(false); setIsFixed(false);}}/>}
            <div className={`w-full h-full flex flex-col gap-[2.4rem] justify-between ${isFixed ? 'fixed' : ''} `}>
             
 
@@ -69,7 +65,7 @@ const List =() =>{
                     price={stock.price}
                     dir={stock.changeRate}
                     change={stock.change}
-                    onType={(type) => OpenModalType(type,stock.stockCode,stock.stockName,stock.price)}
+                    onType={(type) => OpenModalType(type,stock.stockCode)}
                     />
                 ))
                 ) : (
