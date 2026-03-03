@@ -1,19 +1,19 @@
 import closeIcon from '/icons/order/close.svg'
 import plusIcon from '/icons/order/plus.svg'
 import minusIcon from '/icons/order/minus.svg'
-import { useState } from 'react'
+import { useState } from 'react';
+import { useStockInfo } from '../../../apis/query/useStockInfo';
+import { usePostOrder } from '../../../apis/query/usePostOrder';
 interface OrderModalProps {
-    stockName: string;
     stockCode: string;
-    stockPrice: number;
-    myStockCount: number;
     onClose: () => void
 }
-const SellModal = ({stockName, stockCode, stockPrice, myStockCount, onClose}: OrderModalProps) => {
-    const [quantity, setQuantity] = useState(1)
-    const price = stockPrice;
-    const maxQuantity = myStockCount || 0;
-
+const SellModal = ({ stockCode, onClose}: OrderModalProps) => {
+    const { mutate: createOrder } = usePostOrder();
+    const [quantity, setQuantity] = useState(0)
+    const { stock } = useStockInfo(stockCode);
+    const price = stock?.price ?? 0;
+    const maxQuantity = stock?.userStockQuantity || 0;
     const handleMinus = () => {
         setQuantity(prev => Math.max(0, prev - 1))
     }
@@ -23,23 +23,42 @@ const SellModal = ({stockName, stockCode, stockPrice, myStockCount, onClose}: Or
             setQuantity(prev => prev + 1)
         };
     }
+    const handleOrder = () => {
+        if (quantity <= 0) return; 
+        createOrder(
+            {
+            stockCode: stock?.stockCode || '0',
+            orderType: "SELL",
+            price: stock?.price || 0,
+            quantity: quantity,
+            },
+            {
+            onSuccess: (data) => {
+                console.log("팔기 성공", data);
+            },
+            onError: (error) => {
+                console.error("팔기 실패", error);
+            },
+            }
+        );
+    };
     return (
         <div className="max-w-[500px] fixed top-0 z-102 w-full h-full bg-[#00000080]">
             <div className="relative w-full h-full">
                 <div className="absolute bottom-0 rounded-t-[32px] bg-white  w-full py-[2rem]">
                     <div className="flex flex-row justify-between items-center border-b border-b-[#F3F4F6] px-[2.4rem] pb-[2rem] pt-[1rem]">
-                        <span className='text-[1.7rem] font-bold'>매수하기</span>
+                        <span className='text-[1.7rem] font-bold'>매도하기</span>
                         <img src={closeIcon} className="w-[2.4rem] h-[2.4rem] cursor-pointer" onClick={onClose}/>
                     </div>
                     <div className='relative w-full px-[2.4rem]'>
                         <div className='p-[2rem] flex flex-col gap-[0.2rem] bg-[#F9FAFB] rounded-[16px] mt-[2.4rem]'>
-                            <h1 className='text-[1.8rem] font-bold'>{stockName}</h1>
+                            <h1 className='text-[1.8rem] font-bold'>{stock?.stockName}</h1>
                             <p className='text-[1.4rem] text-[#6A7282] font-normal'>{stockCode}</p>
                             <p className='text-[3rem] font-bold'>{price.toLocaleString()} <span className='text-[2rem] font-bold'>원</span></p>
                         </div>
                         <div className='flex flex-row justify-between mt-[2.4rem] items-center'>
                             <span className='text-[1.4rem] font-bold'>보유 수량</span>
-                            <span className='text-[1.4rem] font-normal'>{myStockCount}주 보유</span>
+                            <span className='text-[1.4rem] font-normal'>{stock?.userStockQuantity}주 보유</span>
                         </div>
                         <div className='flex flex-row justify-around gap-[2rem] mt-[1.6rem] items-center'>
                             <img src={minusIcon} className='w-[2rem] h-[2rem]' onClick={handleMinus}/>
@@ -53,8 +72,8 @@ const SellModal = ({stockName, stockCode, stockPrice, myStockCount, onClose}: Or
                             </div>
                             <div className='text-[#6A7282] text-[1.4rem] font-normal mt-[1.9rem]'> {price.toLocaleString()}원 × {quantity}주</div>
                         </div>
-                        <button className='w-full mt-[3.2rem] rounded-[16px] bg-[#E7000B] text-white text-[1.6rem] font-bold py-[1.6rem]' onClick={onClose}>
-                            매수하기
+                        <button className='w-full mt-[3.2rem] rounded-[16px] bg-[#E7000B] text-white text-[1.6rem] font-bold py-[1.6rem]' onClick={()=>{onClose(); handleOrder();}}>
+                            매도하기
                         </button>
                     </div>
                     

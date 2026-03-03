@@ -12,8 +12,8 @@ const Order = () =>{
     return (
         <div className="relative w-full h-full flex flex-col gap-[2.4rem] justify-between bg-[#fafafa]">
             <OrderHeader stockName={stockName}/>
-            {isSellOpen &&  <SellModal stockName={stockName} stockCode="000660" stockPrice={128000} myStockCount={3} onClose={() => setIsSellOpen(false)}/>}
-            {isBuyOpen &&  <BuyModal stockName={stockName} stockCode="000660" stockPrice={128000} myAsset={1000000} onClose={() => setIsBuyOpen(false)}/>}
+            {isSellOpen &&  <SellModal  stockCode="000660" onClose={() => setIsSellOpen(false)}/>}
+            {isBuyOpen &&  <BuyModal stockCode="0000000" onClose={() => setIsBuyOpen(false)}/>}
             <div className="relative pt-[8rem] px-[2rem] pb-[11rem] flex flex-col gap-[1.6rem] bg-[#fafafa]">
                 <div className="rounded-3xl bg-white shadow-sm p-[2.4rem]">
                      <h1 className="text-[#6A7282] text-[1.4rem] font-normal">현재가</h1>
