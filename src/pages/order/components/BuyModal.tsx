@@ -7,9 +7,10 @@ import { usePostOrder } from '../../../apis/query/usePostOrder';
 interface OrderModalProps {
     stockCode: string;
     onClose: () => void
+    onOrderSuccess?: () => void;
 }
-const BuyModal = ({stockCode,onClose}: OrderModalProps) => {
-    const { mutate: createOrder } = usePostOrder();
+const BuyModal = ({stockCode,onClose,onOrderSuccess}: OrderModalProps) => {
+    const { mutate: createOrder, isPending } = usePostOrder();
     const [quantity, setQuantity] = useState(0);
     const { stock } = useStockInfo(stockCode);
     const price = stock?.price ?? 0;
@@ -20,7 +21,6 @@ const BuyModal = ({stockCode,onClose}: OrderModalProps) => {
     const handleMinus = () => {
         setQuantity(prev => Math.max(0, prev - 1))
     }
-    console.log(stock);
     const handlePlus = () => {
         setQuantity(prev => Math.min(maxQuantity, prev + 1))
     }
@@ -37,6 +37,8 @@ const BuyModal = ({stockCode,onClose}: OrderModalProps) => {
             {
             onSuccess: (data) => {
                 console.log("주문 성공", data);
+                onOrderSuccess?.();
+                onClose();
             },
             onError: (error) => {
                 console.error("주문 실패", error);
@@ -75,8 +77,8 @@ const BuyModal = ({stockCode,onClose}: OrderModalProps) => {
                             </div>
                             <div className='text-[#6A7282] text-[1.4rem] font-normal mt-[1.9rem]'> {price.toLocaleString()}원 × {quantity}주</div>
                         </div>
-                        <button className='w-full mt-[3.2rem] rounded-[16px] bg-[#155DFC] text-white text-[1.6rem] font-bold py-[1.6rem]' onClick={()=>{onClose(); handleOrder();}}>
-                            매수하기
+                        <button disabled={quantity <= 0 || isPending} className='w-full mt-[3.2rem] rounded-[16px] bg-[#155DFC] text-white text-[1.6rem] font-bold py-[1.6rem] disabled:opacity-50' onClick={handleOrder}>
+                            {isPending ? '매수 중' : '매수하기'}
                         </button>
                     </div>
                     

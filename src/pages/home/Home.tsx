@@ -6,11 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import { INVEST_CHEERS } from '../../constants/investmentCheers';
 import { useState } from 'react';
 import Logout from './components/Logout';
+import { useAssetInfo } from '../../apis/query/useAssetInfo';
 const Home =()=>{
     const navigate = useNavigate();
     const nickname = localStorage.getItem('nickname') || '투자왕님';
     const [randomCheer] = useState(() =>INVEST_CHEERS[Math.floor(Math.random() * INVEST_CHEERS.length)]);
-    const myAsset = 10000000;
+    const { assetInfo } = useAssetInfo();
+    const myAsset = (assetInfo?.balance ?? 0) + (assetInfo?.totalStockEvaluation ?? 0);
+    const stockCount = assetInfo?.stocks.length ?? 0;
+    const totalStockQuantity = assetInfo?.totalStockQuantity ?? 0;
+    const profitRate = assetInfo?.totalProfitRate ?? 0;
     return (
         <div className="pt-[7.2rem] pb-[8rem] px-[2rem] flex flex-col gap-[2.3rem] justify-between bg-[#F9FAFB]">
             <div className='flex flex-row justify-between items-center'>
@@ -30,11 +35,11 @@ const Home =()=>{
                 <div className="flex flex-row justify-between items-center gap-2 pt-[1.6rem]">
                    <div className='flex flex-col gap-[0.2rem] items-start'>
                         <span className="text-[#FFF] text-[1.2rem]">보유 현금</span>
-                        <span className='text-white text-[1.6rem] font-bold'>86,500원</span>
+                        <span className='text-white text-[1.6rem] font-bold'>{(assetInfo?.balance ?? 0).toLocaleString()}원</span>
                    </div>
                    <div className='flex flex-col gap-[0.2rem] items-end'>
                         <span className="text-[#FFF] text-[1.2rem]">주식 평가액</span>
-                        <span className='text-white text-[1.6rem] font-bold'>175,500원</span>
+                        <span className='text-white text-[1.6rem] font-bold'>{(assetInfo?.totalStockEvaluation ?? 0).toLocaleString()}원</span>
                    </div>
                 </div>
             </div>
@@ -57,9 +62,9 @@ const Home =()=>{
                 </div>
             </div>
             <div className='flex flex-row justify-between items-center gap-3'>
-                <InfoBox type='count' data={0}/>
-                <InfoBox type='stock' data={0}/>
-                <InfoBox type='revenue' data={0}/>
+                <InfoBox type='count' data={stockCount}/>
+                <InfoBox type='stock' data={totalStockQuantity}/>
+                <InfoBox type='revenue' data={Number(profitRate.toFixed(2))}/>
             </div>
             <div className='flex flex-row gap-3'>
               <MenuBox icon="/icons/home/buy.png" title="주식 사기" description="종목 둘러보기" onLanding={()=>navigate('/list')}/>

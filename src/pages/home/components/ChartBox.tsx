@@ -8,8 +8,9 @@ import {
   type ChartEvent,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { ActiveElement, TooltipItem } from 'chart.js';
+import { useAssetSnapshot } from '../../../apis/query/useAssetSnapshot';
 
 ChartJS.register(
   LineElement,
@@ -19,30 +20,35 @@ ChartJS.register(
   Tooltip
 );
 
-interface AssetData {
-  date: string;
-  value: number;
-}
-// TODO: 나중에 API 연결해서 작업하기!!
-const mockAssetData: AssetData[] = [
-  { date: '1/25', value: 980000 },
-  { date: '1/26', value: 1010000 },
-  { date: '1/27', value: 995000 },
-  { date: '1/28', value: 1080000 },
-  { date: '1/29', value: 1040000 },
-  { date: '1/30', value: 1120000 },
-  { date: '1/31', value: 1180000 },
-];
-const labels = mockAssetData.map((d) => d.date);
+const formatSnapshotDate = (date: string) => {
+  const [, month, day] = date.split('-');
+  return `${Number(month)}/${Number(day)}`;
+};
 
 const ChartBox = () => {
-  const [selected, setSelected] = useState<AssetData | null>(null);
-// TODO: 이거 스타일링 부분임 나중에 확인
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const { snapshots, isLoading, isError } = useAssetSnapshot();
+
+  const assetData = useMemo(
+    () =>
+      snapshots.map((snapshot) => ({
+        date: formatSnapshotDate(snapshot.snapshotDate),
+        value: snapshot.totalAsset,
+      })),
+    [snapshots]
+  );
+
+  const labels = assetData.map((d) => d.date);
+  const selected =
+    selectedIndex !== null && assetData[selectedIndex]
+      ? assetData[selectedIndex]
+      : assetData.at(-1) ?? null;
+
   const chartData = {
-    labels: mockAssetData.map((d) => d.date),
+    labels,
     datasets: [
       {
-        data: mockAssetData.map((d) => d.value),
+        data: assetData.map((d) => d.value),
         borderColor: '#EF4444',
         borderWidth: 3,
         tension: 0.4,
@@ -68,7 +74,7 @@ const ChartBox = () => {
     ) => {
       if (!elements.length) return;
       const index = elements[0].index;
-      setSelected(mockAssetData[index]);
+      setSelectedIndex(index);
     },
 
     onClick: (
@@ -77,12 +83,12 @@ const ChartBox = () => {
     ) => {
       if (!elements.length) return;
       const index = elements[0].index;
-      setSelected(mockAssetData[index]);
+      setSelectedIndex(index);
     },
 
     plugins: {
       legend: {
-        display: true,
+        display: false,
       },
       tooltip: {
         enabled: true,
@@ -98,22 +104,13 @@ const ChartBox = () => {
         grid: {
           display: false,
         },
-        scales: {
-            x: {
-                grid: { display: false },
-                ticks: {
-                color: '#9CA3AF',
-                maxTicksLimit: 5,
-                callback: (_value:number, index:number) => {
-                    return index % 2 === 0 ? labels[index] : '';
-                },
-                },
-            },
-            y: {
-                display: false,
-            },
+        ticks: {
+          color: '#9CA3AF',
+          maxTicksLimit: 5,
+          callback: (_value: string | number, index: number) => {
+            return index % 2 === 0 ? labels[index] : '';
+          },
         },
-
       },
       y: {
         display: false,
@@ -124,7 +121,19 @@ const ChartBox = () => {
   return (
     <div className="flex gap-[24px] bg-white rounded-[24px] pt-[5rem] px-[1rem] pb-[2rem] shadow-sm relative">
       <div className="flex-1 h-[220px]">
-        <Line data={chartData} options={chartOptions} />
+        {assetData.length > 0 ? (
+          <Line data={chartData} options={chartOptions} />
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <span className="text-[1.4rem] text-gray-300">
+              {isLoading
+                ? '자산 데이터를 불러오는 중'
+                : isError
+                  ? '자산 데이터를 불러오지 못했어요'
+                  : '표시할 자산 데이터가 없어요'}
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="flex flex-row justify-center absolute top-[2rem] left-[2rem] items-center gap-3">

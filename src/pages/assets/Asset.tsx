@@ -2,58 +2,14 @@ import ideaImg from '/icons/assets/idea.png';
 import MyAsset from './components/MyAsset';
 import { useState } from 'react';
 import { INVEST_TIPS } from "../../constants/investmentTips";
+import { useAssetInfo } from '../../apis/query/useAssetInfo';
 const Asset = ()=>{
     const [randomTip] = useState(() =>
     INVEST_TIPS[Math.floor(Math.random() * INVEST_TIPS.length)]
     );
-
-    const stocKList = [
-        {
-            stockName: 'SK 하이닉스',
-            stockCount: 10,
-            stockPrice: 98900,
-            totalAmount: 890000,
-            profitLoss: 980
-        },
-        {
-            stockName: '삼성전자',
-            stockCount: 5,
-            stockPrice: 75000,
-            totalAmount: 375000,
-            profitLoss: 5000
-        },
-        {
-            stockName: '삼성전자',
-            stockCount: 5,
-            stockPrice: 75000,
-            totalAmount: 375000,
-            profitLoss: 5000
-        },{
-            stockName: '삼성전자',
-            stockCount: 5,
-            stockPrice: 75000,
-            totalAmount: 375000,
-            profitLoss: 5000
-        },{
-            stockName: '삼성전자',
-            stockCount: 5,
-            stockPrice: 75000,
-            totalAmount: 375000,
-            profitLoss: 5000
-        },{
-            stockName: '삼성전자',
-            stockCount: 5,
-            stockPrice: 75000,
-            totalAmount: 375000,
-            profitLoss: 5000
-        },{
-            stockName: '삼성전자',
-            stockCount: 5,
-            stockPrice: 75000,
-            totalAmount: 375000,
-            profitLoss: 5000
-        }
-    ]
+    const { assetInfo, isLoading, isError } = useAssetInfo();
+    const stocks = assetInfo?.stocks ?? [];
+    const totalProfitAmount = assetInfo?.totalProfitAmount ?? 0;
     return (
         <div className="pt-[7.2rem] pb-[8rem] flex flex-col justify-between bg-[#F9FAFB] flex flex-col justify-start">
              <div className="flex flex-col px-[2rem] gap-[0.4rem]">
@@ -64,9 +20,9 @@ const Asset = ()=>{
            <div className="relative px-[2rem] w-full mt-[2.4rem] z-10">
                 <div className="rounded-3xl bg-white shadow-lg p-[2.4rem] relative ">
                     <h1 className="text-[1.4rem] leading-8 tracking-[-0.015rem] font-normal">주식 평가액</h1>
-                    <p className="mt-[0.3rem] mb-[1.2rem] font-bold text-[3.6rem]">890,870<span className="font-normal text-[2rem]">원</span></p>
+                    <p className="mt-[0.3rem] mb-[1.2rem] font-bold text-[3.6rem]">{(assetInfo?.totalStockEvaluation ?? 0).toLocaleString()}<span className="font-normal text-[2rem]">원</span></p>
                     <span className="rounded-full bg-[#155DFC] py-[0.7rem] px-[1.2rem] text-[1.6rem] text-white font-semibold">
-                        +980원
+                        {totalProfitAmount >= 0 ? '+' : ''}{totalProfitAmount.toLocaleString()}원
                     </span>
                 </div>
            </div>
@@ -83,16 +39,28 @@ const Asset = ()=>{
                     <div className='pt-[2.4rem] pb-[9rem] px-[2rem] w-full flex flex-col gap-[0.8rem]'>
                             <div className='flex flex-row justify-between items-center mb-[1.2rem]'>
                                 <h2 className='text-[1.8rem] font-bold'>보유 주식</h2>
-                                <span className='text-[1.4rem] text-[#6A7282] font-normal'>2개 종목</span>
+                                <span className='text-[1.4rem] text-[#6A7282] font-normal'>{stocks.length}개 종목</span>
                             </div>
-                            {stocKList.map((stock, index) => (
+                            {isLoading && (
+                                <div className="py-[3rem] text-center text-[1.4rem] text-gray-400">자산 정보를 불러오는 중</div>
+                            )}
+                            {isError && (
+                                <div className="py-[3rem] text-center text-[1.4rem] text-gray-400">자산 정보를 불러오지 못했어요</div>
+                            )}
+                            {!isLoading && !isError && stocks.length === 0 && (
+                                <div className="py-[3rem] text-center text-[1.4rem] text-gray-400">아직 보유한 주식이 없어요</div>
+                            )}
+                            {stocks.map((stock) => (
                                 <MyAsset
-                                    key={index}
-                                    stockName={stock.stockName}
-                                    stockCount={stock.stockCount}
-                                    stockPrice={stock.stockPrice}
-                                    totalAmount={stock.totalAmount}
-                                    profitLoss={stock.profitLoss}
+                                    key={stock.stockCode}
+                                    stockCode={stock.stockCode}
+                                    stockName={stock.stockCode}
+                                    stockCount={stock.quantity}
+                                    stockPrice={stock.currentPrice}
+                                    totalAmount={stock.currentTotalAmount}
+                                    investedAmount={stock.investedAmount}
+                                    profitLoss={stock.profitAmount}
+                                    profitRate={stock.profitRate}
                                 />
                             ))}
                     </div>

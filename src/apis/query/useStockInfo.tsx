@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { api } from "../../lib/api";
 
 interface StockDto {
@@ -18,9 +18,10 @@ export const useStockInfo = (code: string) => {
   const [stock, setStock] = useState<StockDto | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const accessToken = localStorage.getItem("accessToken");
 
-  const getStockInfo = async () => {
+  const getStockInfo = useCallback(async () => {
+    const accessToken = localStorage.getItem("accessToken");
+
     try {
       setIsLoading(true);
 
@@ -42,13 +43,13 @@ export const useStockInfo = (code: string) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [code]);
 
   useEffect(() => {
     if (code) getStockInfo();
-  }, [code]);
+  }, [code, getStockInfo]);
 
   return {
-    stock, isLoading, isError
+    stock, isLoading, isError, getStockInfo
   };
 };

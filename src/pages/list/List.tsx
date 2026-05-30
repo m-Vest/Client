@@ -9,7 +9,7 @@ const List =() =>{
     const [isBuyOpen, setIsBuyOpen] = useState(false);
     const [isFixed, setIsFixed] = useState(false);
     const [stockCode, setStockCode] = useState('0');
-    const { stockList, isLoading, isError } = useGetStockList();
+    const { stockList, isLoading, isError, getStockList } = useGetStockList();
     const [page, setPage] = useState(1);
     
     const PAGE_SIZE = 5;
@@ -44,8 +44,8 @@ const List =() =>{
 
     return (
         <div className="pt-[8.2rem] pb-[8rem] bg-[#F9FAFB]">
-            {isBuyOpen && <BuyModal stockCode={stockCode} onClose={() => {setIsBuyOpen(false); setIsFixed(false);}}/>}
-            {isSellOpen && <SellModal stockCode={stockCode} onClose={() => {setIsSellOpen(false); setIsFixed(false);}}/>}
+            {isBuyOpen && <BuyModal stockCode={stockCode} onClose={() => {setIsBuyOpen(false); setIsFixed(false);}} onOrderSuccess={getStockList}/>}
+            {isSellOpen && <SellModal stockCode={stockCode} onClose={() => {setIsSellOpen(false); setIsFixed(false);}} onOrderSuccess={getStockList}/>}
            <div className={`w-full h-full flex flex-col gap-[2.4rem] justify-between ${isFixed ? 'fixed' : ''} `}>
             
 
