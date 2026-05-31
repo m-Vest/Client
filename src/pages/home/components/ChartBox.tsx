@@ -11,6 +11,7 @@ import { Line } from 'react-chartjs-2';
 import { useMemo, useState } from 'react';
 import type { ActiveElement, TooltipItem } from 'chart.js';
 import { useAssetSnapshot } from '../../../apis/query/useAssetSnapshot';
+import { useAssetInfo } from '../../../apis/query/useAssetInfo';
 
 ChartJS.register(
   LineElement,
@@ -25,20 +26,54 @@ const formatSnapshotDate = (date: string) => {
   return `${Number(month)}/${Number(day)}`;
 };
 
+const formatLocalDate = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+};
+
 const ChartBox = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const { snapshots, isLoading, isError } = useAssetSnapshot();
+  const {
+    assetInfo,
+    isLoading: isAssetInfoLoading,
+    isError: isAssetInfoError,
+  } = useAssetInfo();
 
   const assetData = useMemo(
-    () =>
-      snapshots.map((snapshot) => ({
+    () => {
+      const snapshotMap = new Map(
+        snapshots.map((snapshot) => [snapshot.snapshotDate, snapshot])
+      );
+
+      if (assetInfo) {
+        const today = formatLocalDate(new Date());
+
+        snapshotMap.set(today, {
+          snapshotDate: today,
+          totalAsset: assetInfo.balance + assetInfo.totalStockEvaluation,
+          cashAmount: assetInfo.balance,
+          stockEvaluationAmount: assetInfo.totalStockEvaluation,
+        });
+      }
+
+      return Array.from(snapshotMap.values())
+        .sort((a, b) => a.snapshotDate.localeCompare(b.snapshotDate))
+        .map((snapshot) => ({
         date: formatSnapshotDate(snapshot.snapshotDate),
         value: snapshot.totalAsset,
-      })),
-    [snapshots]
+      }));
+    },
+    [snapshots, assetInfo]
   );
 
   const labels = assetData.map((d) => d.date);
+  const isEmptyData = assetData.length === 0;
+  const isChartLoading = isLoading || isAssetInfoLoading;
+  const isChartError = isError && isAssetInfoError;
   const selected =
     selectedIndex !== null && assetData[selectedIndex]
       ? assetData[selectedIndex]
@@ -52,7 +87,10 @@ const ChartBox = () => {
         borderColor: '#EF4444',
         borderWidth: 3,
         tension: 0.4,
-        pointRadius: 0,
+        pointRadius: assetData.length <= 2 ? 5 : 2,
+        pointBackgroundColor: '#EF4444',
+        pointBorderColor: '#FFFFFF',
+        pointBorderWidth: 2,
         pointHitRadius: 14,     
         pointHoverRadius: 6,
       },
@@ -108,7 +146,10 @@ const ChartBox = () => {
           color: '#9CA3AF',
           maxTicksLimit: 5,
           callback: (_value: string | number, index: number) => {
-            return index % 2 === 0 ? labels[index] : '';
+            const isFirst = index === 0;
+            const isLast = index === labels.length - 1;
+
+            return isFirst || isLast || index % 2 === 0 ? labels[index] : '';
           },
         },
       },
@@ -121,14 +162,14 @@ const ChartBox = () => {
   return (
     <div className="flex gap-[24px] bg-white rounded-[24px] pt-[5rem] px-[1rem] pb-[2rem] shadow-sm relative">
       <div className="flex-1 h-[220px]">
-        {assetData.length > 0 ? (
+        {!isEmptyData ? (
           <Line data={chartData} options={chartOptions} />
         ) : (
           <div className="flex h-full items-center justify-center">
             <span className="text-[1.4rem] text-gray-300">
-              {isLoading
+              {isChartLoading
                 ? '자산 데이터를 불러오는 중'
-                : isError
+                : isChartError
                   ? '자산 데이터를 불러오지 못했어요'
                   : '표시할 자산 데이터가 없어요'}
             </span>
